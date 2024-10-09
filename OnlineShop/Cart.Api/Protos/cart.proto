@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cart.Api";
+
+package greet;
+
+// The greeting service definition.
+service Cart {
+  // Sends a greeting
+  rpc SayHello (SimpleRequest) returns (SimpleResponse);
+  rpc GetList (SimpleRequest) returns (SimpleResponse);
+  rpc AddItem (SimpleRequest) returns (SimpleResponse);
+  rpc RemoveItem (SimpleRequest) returns (SimpleResponse);
+}
+
+// The request message containing the user's name.
+message SimpleRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message SimpleResponse {
+  string message = 1;
+}

@@ -1,0 +1,11 @@
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\bin\Debug\net8.0\Cart.Core.deps.json
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\bin\Debug\net8.0\Cart.Core.dll
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\bin\Debug\net8.0\Cart.Core.pdb
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\Cart.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\Cart.Core.AssemblyInfoInputs.cache
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\Cart.Core.AssemblyInfo.cs
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\Cart.Core.csproj.CoreCompileInputs.cache
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\Cart.Core.dll
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\refint\Cart.Core.dll
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\Cart.Core.pdb
+C:\my\projects\study\dotnet\OnlineShop\OnlineShop\Cart.Core\obj\Debug\net8.0\ref\Cart.Core.dll
