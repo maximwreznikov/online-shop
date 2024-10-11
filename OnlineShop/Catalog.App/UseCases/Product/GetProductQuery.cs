@@ -1,10 +1,7 @@
-using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using MediatR;
 
 namespace Catalog.App.UseCases.Product;
-
-
 
 public record GetProductQuery : IRequest<ProductResponse>
 {

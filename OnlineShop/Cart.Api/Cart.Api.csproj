@@ -25,4 +25,8 @@
       <Folder Include="UseCases\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Cart.Core\Cart.Core.csproj" />
+    </ItemGroup>
+
 </Project>
