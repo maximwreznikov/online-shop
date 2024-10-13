@@ -1,6 +1,6 @@
 namespace Cart.Core.Entities;
 
-public class CartItem
+public class CartItemEntity
 {
     public int Id { get; set; }
 

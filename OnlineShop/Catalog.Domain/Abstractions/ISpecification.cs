@@ -1,4 +1,4 @@
-namespace Catalog.App.Abstractions;
+namespace Catalog.Domain.Abstractions;
 
 public interface ISpecification<out T>
 {

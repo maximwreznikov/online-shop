@@ -1,7 +1,11 @@
+using Catalog.Domain.Abstractions;
+
 namespace Catalog.Domain.Entities;
 
-public class Category
+public class CategoryEntity : IEntity
 {
+    public int Id { get; set; }
+    
     public string Name { get; set; } = string.Empty;
     
     public string? Image { get; set; }

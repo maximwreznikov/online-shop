@@ -1,4 +1,3 @@
-using Catalog.App.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Catalog.DAL;

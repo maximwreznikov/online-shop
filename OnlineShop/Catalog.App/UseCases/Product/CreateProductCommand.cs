@@ -4,12 +4,7 @@ using MediatR;
 
 namespace Catalog.App.UseCases.Product;
 
-
-
-public record CreateProductCommand : IRequest<Result<int>>
-{
-    public int Id { get; init; }
-}
+public record CreateProductCommand(int Id) : IRequest<Result<int>>;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<int>>
 {

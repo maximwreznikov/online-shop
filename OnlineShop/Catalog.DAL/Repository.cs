@@ -1,38 +1,33 @@
 using Catalog.App.Abstractions;
+using Catalog.Domain.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.DAL;
 
-internal class Repository<T> : IRepository<T>
+internal class Repository<T>(CatalogContext context) : IRepository<T> where T : class, IEntity
 {
-    private readonly CatalogContext _context;
+    public async Task Create(T item)
+    {
+        context.Set<T>().Add(item);
+    }
+
+    public Task<T?> Get(int id)
+    {
+        return context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task Update(T item)
+    {
+        context.Set<T>().Update(item);
+    }
+
+    public async Task Delete(T item)
+    {
+        context.Set<T>().Remove(item);
+    }
     
-    public Repository(CatalogContext context)
+    public Task<List<T>> Find(ISpecification<T> specification)
     {
-        _context = context;
-    }
-    
-    public Task Create()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<T> Get(ISpecification<T> specification)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task Update(T item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task Delete(T item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<T>> Find(ISpecification<T> specification)
-    {
-        throw new NotImplementedException();
+        return specification.Query().ToListAsync();
     }
 }
