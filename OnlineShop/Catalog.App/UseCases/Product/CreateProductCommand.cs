@@ -1,4 +1,3 @@
-using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using MediatR;
 

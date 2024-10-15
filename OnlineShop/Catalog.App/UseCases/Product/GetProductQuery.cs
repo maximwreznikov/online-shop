@@ -19,6 +19,7 @@ public class CreateProductQueryHandler : IRequestHandler<GetProductQuery, Produc
     public async Task<ProductResponse> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
         var product = await _productRepository.Get(request.Id);
-        return new ProductResponse(product.Id, product.Name, product.Description);
+        return new ProductResponse(product.Id, product.Name, product.Description, 
+            product.Image, product.Price, product.Amount, product.Category);
     }
 }

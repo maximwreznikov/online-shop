@@ -15,16 +15,20 @@ public class CartService : ICartService
 
     public Task<CartEntity> Get(Guid cartId)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_cartRepository.Get(cartId));
     }
 
     public Task<CartEntity> AddItem(Guid cartId, int itemId, int amount)
     {
-        // TODO: find cart
+        // find cart
+        var cart = _cartRepository.Get(cartId);
         
         // TODO: add 
-        
-        // TODO: get product from Catalog?
+        // get product from Catalog?
+        cart.Items.Add(new CartItemEntity
+        {
+            
+        });
         
         return Task.FromResult(new CartEntity
         {
@@ -34,6 +38,15 @@ public class CartService : ICartService
 
     public Task<CartEntity> RemoveItem(Guid cartId, int itemId, int amount)
     {
-        throw new NotImplementedException();
+        // find cart
+        var cart = _cartRepository.Get(cartId);
+        // remove item
+        var item = cart.Items.Find(x => x.Id == itemId);
+        if (item != null)
+        {
+            cart.Items.Remove(item);
+        }
+        // update cart
+        return Task.FromResult(_cartRepository.Update(cart));
     }
 }
