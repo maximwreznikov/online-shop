@@ -26,8 +26,11 @@ internal class Repository<T>(CatalogContext context) : IRepository<T> where T : 
         context.Set<T>().Remove(item);
     }
     
-    public Task<List<T>> Find(ISpecification<T> specification)
+    public Task<List<T>> Find(int skip, int take, ISpecification<T> specification)
     {
-        return specification.Query(context.Set<T>()).ToListAsync();
+        return specification.Query(context.Set<T>())
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync();
     }
 }

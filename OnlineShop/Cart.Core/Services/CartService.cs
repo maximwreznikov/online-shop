@@ -27,7 +27,7 @@ public class CartService : ICartService
         // get product from Catalog?
         cart.Items.Add(new CartItemEntity
         {
-            
+            Id = itemId
         });
         
         return Task.FromResult(new CartEntity

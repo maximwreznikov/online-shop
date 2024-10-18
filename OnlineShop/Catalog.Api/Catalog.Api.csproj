@@ -23,11 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\Category\" />
-      <Folder Include="UseCases\Product\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Catalog.App\Catalog.App.csproj" />
     </ItemGroup>
 
