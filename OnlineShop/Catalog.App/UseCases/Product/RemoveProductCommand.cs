@@ -8,24 +8,18 @@ namespace Catalog.App.UseCases.Product;
 
 public record RemoveProductCommand(int Id) : IRequest<Result<int>>;
 
-public class RemoveProductCommandHandler : IRequestHandler<RemoveProductCommand, Result<int>>
+public class RemoveProductCommandHandler(
+    IRepository<ProductEntity> productRepository, 
+    IUnitOfWork unitOfWork)
+    : IRequestHandler<RemoveProductCommand, Result<int>>
 {
-    private readonly IRepository<ProductEntity> _productRepository;
-    private readonly IUnitOfWork _unitOfWork;
-
-    public RemoveProductCommandHandler(IRepository<ProductEntity> productRepository, IUnitOfWork unitOfWork)
-    {
-        _productRepository = productRepository;
-        _unitOfWork = unitOfWork;
-    }
-    
     public async Task<Result<int>> Handle(RemoveProductCommand command, CancellationToken cancellationToken)
     {
-        var product = await _productRepository.Get(command.Id);
-        await _productRepository.Delete(product);
+        var product = await productRepository.Get(command.Id);
+        await productRepository.Delete(product);
         return new Result<int>
         {
-            Value = await _unitOfWork.Save(cancellationToken)
+            Value = await unitOfWork.Save(cancellationToken)
         };
     }
 }

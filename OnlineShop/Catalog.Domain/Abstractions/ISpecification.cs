@@ -1,6 +1,6 @@
 namespace Catalog.Domain.Abstractions;
 
-public interface ISpecification<out T>
+public interface ISpecification<T>
 {
-    IQueryable<T> Query();
+    IQueryable<T> Query(IQueryable<T> source);
 }

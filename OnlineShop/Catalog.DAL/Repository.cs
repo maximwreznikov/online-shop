@@ -28,6 +28,6 @@ internal class Repository<T>(CatalogContext context) : IRepository<T> where T : 
     
     public Task<List<T>> Find(ISpecification<T> specification)
     {
-        return specification.Query().ToListAsync();
+        return specification.Query(context.Set<T>()).ToListAsync();
     }
 }
