@@ -15,6 +15,6 @@ public class CreateProductQueryHandler(IRepository<ProductEntity> productReposit
         var product = await productRepository.Get(request.Id);
         
         return new ProductResponse(product.Id, product.Name, product.Description, 
-            product.Image, product.Price, product.Amount, product.Category);
+            product.Image, product.Price, product.Amount, product.Category?.Name);
     }
 }

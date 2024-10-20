@@ -24,7 +24,6 @@ public class UpdateProductCommandHandler(
         product.Image = newProduct.Image;
         product.Price = newProduct.Price;
         product.Amount = newProduct.Amount;
-        product.Category = newProduct.Category;
         await productRepository.Update(product);
         return new Result<int>
         {

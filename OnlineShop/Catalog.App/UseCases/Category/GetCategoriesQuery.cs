@@ -16,12 +16,12 @@ public class CreateProductListQueryHandler(IRepository<CategoryEntity> categoryR
         var products = await categoryRepository.Find(request.Skip, request.Take, 
             new FilterSpecification<CategoryEntity>());
         
-        return products.Select(x => new CategoryResponse{
+        return products.Select(x => new CategoryResponse
+        {
             Id = x.Id, 
             Name = x.Name,
             Image = x.Image, 
             ParentCategory = x.ParentCategory
-            
         });
     }
 }

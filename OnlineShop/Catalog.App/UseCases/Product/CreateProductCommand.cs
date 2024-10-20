@@ -22,8 +22,7 @@ public class CreateProductCommandHandler(
             Description = newProduct.Description,
             Image = newProduct.Image,
             Price = newProduct.Price,
-            Amount = newProduct.Amount,
-            Category = newProduct.Category
+            Amount = newProduct.Amount
         };
         
         await productRepository.Create(newEntity);

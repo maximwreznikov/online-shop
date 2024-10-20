@@ -8,6 +8,6 @@ public record ProductResponse
     string? Image,
     decimal Price,
     uint Amount,
-    string Category
+    string? Category
 );
     

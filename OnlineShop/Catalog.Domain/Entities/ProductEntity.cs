@@ -16,6 +16,9 @@ public class ProductEntity : IEntity
     public decimal Price { get; set; }
     
     public uint Amount { get; set; }
-
-    public string Category { get; set; } = null!;
+    
+    
+    public int? CategoryId { get; set; }
+    
+    public CategoryEntity? Category { get; set; } = null!;
 }

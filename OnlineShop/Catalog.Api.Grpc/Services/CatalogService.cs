@@ -1,7 +1,6 @@
 using Grpc.Core;
-using Catalog.Api;
 
-namespace Catalog.Api.Services;
+namespace Catalog.Api.Grpc.Services;
 
 public class CatalogService : Catalog.CatalogBase
 {

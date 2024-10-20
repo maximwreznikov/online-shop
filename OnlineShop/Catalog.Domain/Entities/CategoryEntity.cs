@@ -10,5 +10,9 @@ public class CategoryEntity : IEntity
     
     public string? Image { get; set; }
     
+    public int? ParentCategoryId { get; set; }
+    
     public string? ParentCategory { get; set; }
+    
+    public ICollection<ProductEntity> Products { get; set; } = new List<ProductEntity>();
 }

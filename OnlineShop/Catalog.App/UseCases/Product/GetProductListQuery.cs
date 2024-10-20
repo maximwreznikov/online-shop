@@ -18,6 +18,6 @@ public class CreateProductListQueryHandler(IRepository<ProductEntity> productRep
         
         return products.Select(x => new ProductResponse(
             x.Id, x.Name, x.Description, 
-            x.Image, x.Price, x.Amount, x.Category));
+            x.Image, x.Price, x.Amount, x.Category?.Name));
     }
 }

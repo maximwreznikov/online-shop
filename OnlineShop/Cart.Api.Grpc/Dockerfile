@@ -7,8 +7,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Cart.Api/Cart.Api.csproj", "Cart.Api/"]
-RUN dotnet restore "Cart.Api/Cart.Api.csproj"
+COPY ["./Cart.Api.csproj", "Cart.Api/"]
+RUN dotnet restore "./Cart.Api/Cart.Api.csproj"
 COPY . .
 WORKDIR "/src/Cart.Api"
 RUN dotnet build "Cart.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build

@@ -1,20 +1,24 @@
-using Cart.Api.Services;
-using Cart.Core;
-using Cart.DAL;
+using Cart.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddGrpc();
-
-builder.Services.AddCore(builder.Configuration);
-builder.Services.AddPersistence(builder.Configuration);
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.MapGrpcService<CartApi>();
-app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
+app.UseHttpsRedirection();
+
+CartEndpoints.MapV1(app.MapGroup("api/v1"));
+CartEndpoints.MapV2(app.MapGroup("api/v2"));
 
 app.Run();
