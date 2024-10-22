@@ -1,25 +1,31 @@
 using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
 using MediatR;
 
 namespace Catalog.App.UseCases.Category;
 
-public record RemoveCategoryCommand(int Id) : IRequest<Result<int>>;
+public record RemoveCategoryCommand(int Id) : IRequest<CategoryResponse>;
 
 public class RemoveProductCommandHandler(
     IRepository<CategoryEntity> categoryRepository, 
     IUnitOfWork unitOfWork)
-    : IRequestHandler<RemoveCategoryCommand, Result<int>>
+    : IRequestHandler<RemoveCategoryCommand, CategoryResponse>
 {
-    public async Task<Result<int>> Handle(RemoveCategoryCommand command, CancellationToken cancellationToken)
+    public async Task<CategoryResponse> Handle(RemoveCategoryCommand command, CancellationToken cancellationToken)
     {
         var category = await categoryRepository.Get(command.Id);
         await categoryRepository.Delete(category);
-        return new Result<int>
+        await unitOfWork.Save(cancellationToken);
+        
+        return new CategoryResponse
         {
-            Value = await unitOfWork.Save(cancellationToken)
+            Id = category.Id,
+            Name = category.Name,
+            ParentCategory = category.ParentCategory,
+            ParentCategoryId = category.ParentCategoryId
         };
     }
 }

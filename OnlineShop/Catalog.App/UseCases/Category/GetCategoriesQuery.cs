@@ -1,5 +1,7 @@
 using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Specifications;
+using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
 using MediatR;
@@ -14,7 +16,7 @@ public class CreateProductListQueryHandler(IRepository<CategoryEntity> categoryR
     public async Task<IEnumerable<CategoryResponse>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
     {
         var products = await categoryRepository.Find(request.Skip, request.Take, 
-            new FilterSpecification<CategoryEntity>());
+            new EmptyFilter<CategoryEntity>());
         
         return products.Select(x => new CategoryResponse
         {

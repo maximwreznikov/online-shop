@@ -2,7 +2,7 @@ using Catalog.Domain.Abstractions;
 
 namespace Catalog.Domain.Entities;
 
-public class ProductEntity : IEntity
+public class ProductEntity : IEntity, INamedEntity
 {
     public int Id { get; set; }
     

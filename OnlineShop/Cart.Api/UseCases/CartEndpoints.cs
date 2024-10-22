@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cart.Api;
+namespace Cart.Api.UseCases;
 
 public static class CartEndpoints
 {
     public static void MapV1(RouteGroupBuilder group)
     {
-        group.MapGet("/carts/{id}", async (int id) =>
-        {
-            return Results.Ok();
-        })
+        group.MapGet("/carts/{id}", GetCartV1.Execute)
         .WithName("GetCart V1")
         .WithOpenApi();
     

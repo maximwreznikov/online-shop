@@ -1,8 +1,8 @@
 using Catalog.Domain.Abstractions;
 
-namespace Catalog.App.Abstractions;
+namespace Catalog.App.Specifications;
 
-public class FilterSpecification<T> : ISpecification<T> where T: IEntity
+public class EmptyFilter<T> : ISpecification<T> where T: IEntity
 {
     public IQueryable<T> Query(IQueryable<T> source)
     {

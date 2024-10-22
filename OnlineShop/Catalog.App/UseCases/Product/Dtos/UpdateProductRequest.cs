@@ -1,4 +1,4 @@
-namespace Catalog.App.Dtos;
+namespace Catalog.App.UseCases.Product.Dtos;
 
 public class UpdateProductRequest : ProductRequest
 {

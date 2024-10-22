@@ -1,4 +1,5 @@
 using Catalog.App.Dtos;
+using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
 using MediatR;
@@ -14,7 +15,6 @@ public class CreateProductQueryHandler(IRepository<ProductEntity> productReposit
     {
         var product = await productRepository.Get(request.Id);
         
-        return new ProductResponse(product.Id, product.Name, product.Description, 
-            product.Image, product.Price, product.Amount, product.Category?.Name);
+        return new ProductResponse(product);
     }
 }

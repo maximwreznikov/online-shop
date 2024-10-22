@@ -2,7 +2,7 @@ using Catalog.Domain.Abstractions;
 
 namespace Catalog.Domain.Entities;
 
-public class CategoryEntity : IEntity
+public class CategoryEntity : IEntity, INamedEntity
 {
     public int Id { get; set; }
     

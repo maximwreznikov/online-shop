@@ -1,4 +1,5 @@
 using Cart.Api;
+using Cart.Api.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,4 +1,5 @@
 using Catalog.App.Dtos;
+using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
 using MediatR;
@@ -13,7 +14,7 @@ public class CreateProductQueryHandler(IRepository<CategoryEntity> categoryRepos
     public async Task<CategoryResponse> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var category = await categoryRepository.Get(request.Id);
-        
+
         return new CategoryResponse
         {
             Id = category.Id, 

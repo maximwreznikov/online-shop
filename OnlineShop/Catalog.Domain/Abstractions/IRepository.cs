@@ -11,4 +11,6 @@ public interface IRepository<T> where T : class, IEntity
     public Task Delete(T item);
     
     public Task<List<T>> Find(int skip, int take, ISpecification<T> specification);
+    
+    public Task<T?> FindSingle(ISpecification<T> specification);
 }

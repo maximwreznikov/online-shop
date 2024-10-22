@@ -7,8 +7,8 @@ namespace Cart.Core;
 
 public static class Bootstrap
 {
-        public static void AddCore(this IServiceCollection serviceCollection, IConfigurationManager configurationManager)
+        public static void AddCore(this IServiceCollection services, IConfigurationManager configurationManager)
         {
-                serviceCollection.AddScoped<ICartService, CartService>();
+                services.AddScoped<ICartService, CartService>();
         }
 }

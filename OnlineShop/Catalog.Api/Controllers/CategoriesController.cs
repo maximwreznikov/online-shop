@@ -1,33 +1,52 @@
 using Catalog.Api.Dtos;
+using Catalog.App.Dtos;
+using Catalog.App.UseCases.Category;
+using Catalog.App.UseCases.Category.Dtos;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CategoriesController : ControllerBase
+public class CategoriesController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CategoryDto>>> Get()
+    public async Task<ActionResult<IEnumerable<CategoryResponse>>> Get(int skip = 0, int take = 1000)
     {
-        return Ok(Enumerable.Empty<CategoryDto>());
+        var categories = await mediator.Send(new GetCategoriesQuery(skip, take));
+        return Ok(categories);
     }
     
     [HttpPost]
-    public async Task<ActionResult<CategoryDto>> Create([FromBody] CategoryDto newCategory)
+    public async Task<ActionResult<CategoryResponse>> Create([FromBody] CategoryDto newCategory)
     {
-        return Created($"/cart/{0}", newCategory);
+        var response = await mediator.Send(new CreateCategoryCommand(new CategoryRequest
+        {
+            Name = newCategory.Name,
+            Image = newCategory.Image,
+            ParentCategory = newCategory.ParentCategory
+        }));
+        return Created($"/cart/{response.Id}", response);
     }
     
     [HttpPut("id")]
-    public async Task<ActionResult<CategoryDto>> Update(int id, [FromBody] CategoryDto newCategory)
+    public async Task<ActionResult<CategoryResponse>> Update([FromRoute] int id, [FromBody] CategoryDto newCategory)
     {
-        return Ok(newCategory);
+        var response = await mediator.Send(new UpdateCategoryCommand(new UpdateCategoryRequest
+        {
+            Id = id,
+            Name = newCategory.Name,
+            Image = newCategory.Image,
+            ParentCategory = newCategory.ParentCategory
+        }));
+        return Ok(response);
     }
     
     [HttpDelete("id")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<ActionResult<CategoryResponse>> Delete([FromRoute]int id)
     {
-        return NoContent();
+        var response = await mediator.Send(new RemoveCategoryCommand(id));
+        return Ok(response);
     }
 }

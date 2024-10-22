@@ -1,22 +1,25 @@
 using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Specifications;
+using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
 using MediatR;
 
 namespace Catalog.App.UseCases.Product;
 
-public record CreateProductCommand(ProductRequest Product) : IRequest<Result<int>>;
+public record CreateProductCommand(ProductRequest Product) : IRequest<ProductResponse>;
 
 public class CreateProductCommandHandler(
     IRepository<ProductEntity> productRepository, 
+    IRepository<CategoryEntity> categoryRepository, 
     IUnitOfWork unitOfWork)
-    : IRequestHandler<CreateProductCommand, Result<int>>
+    : IRequestHandler<CreateProductCommand, ProductResponse>
 {
-    public async Task<Result<int>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<ProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var newProduct = request.Product;
-        var newEntity = new ProductEntity
+        var product = new ProductEntity
         {
             Name = newProduct.Name,
             Description = newProduct.Description,
@@ -24,11 +27,15 @@ public class CreateProductCommandHandler(
             Price = newProduct.Price,
             Amount = newProduct.Amount
         };
+
+        var category = await categoryRepository.FindSingle(
+            new ByNameFilter<CategoryEntity>(newProduct.Category));
+
+        product.CategoryId = category.Id;
         
-        await productRepository.Create(newEntity);
-        return new Result<int>
-        {
-            Value = await unitOfWork.Save(cancellationToken)
-        };
+        await productRepository.Create(product);
+        await unitOfWork.Save(cancellationToken);
+        
+        return new ProductResponse (product);
     }
 }

@@ -33,4 +33,9 @@ internal class Repository<T>(CatalogContext context) : IRepository<T> where T : 
             .Take(take)
             .ToListAsync();
     }
+
+    public Task<T?> FindSingle(ISpecification<T> specification)
+    {
+        return specification.Query(context.Set<T>()).SingleOrDefaultAsync();
+    }
 }

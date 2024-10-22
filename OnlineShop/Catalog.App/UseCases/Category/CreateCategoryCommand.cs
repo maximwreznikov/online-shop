@@ -1,5 +1,7 @@
 using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Specifications;
+using Catalog.App.UseCases.Category.Dtos;
 using Catalog.App.UseCases.Product;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -7,26 +9,39 @@ using MediatR;
 
 namespace Catalog.App.UseCases.Category;
 
-public record CreateCategoryCommand(ProductRequest Product) : IRequest<Result<int>>;
+public record CreateCategoryCommand(CategoryRequest Category) : IRequest<CategoryResponse>;
 
 public class CreateCategoryCommandHandler(
     IRepository<CategoryEntity> categoryRepository, 
     IUnitOfWork unitOfWork)
-    : IRequestHandler<CreateCategoryCommand, Result<int>>
+    : IRequestHandler<CreateCategoryCommand, CategoryResponse>
 {
-    public async Task<Result<int>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+    public async Task<CategoryResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var newProduct = request.Product;
+        var newProduct = request.Category;
         var newEntity = new CategoryEntity
         {
             Name = newProduct.Name,
-            Image = newProduct.Image,
+            Image = newProduct.Image
         };
+
+        if (!string.IsNullOrEmpty(newEntity.ParentCategory))
+        {
+            var parentCategory = await categoryRepository.FindSingle(
+                new ByNameFilter<CategoryEntity>(newEntity.ParentCategory));
+
+            newEntity.ParentCategoryId = parentCategory.Id;
+        }
         
         await categoryRepository.Create(newEntity);
-        return new Result<int>
+        await unitOfWork.Save(cancellationToken);
+        
+        return new CategoryResponse
         {
-            Value = await unitOfWork.Save(cancellationToken)
+            Id = newEntity.Id,
+            Name = newEntity.Name,
+            ParentCategoryId = newEntity.ParentCategoryId,
+            ParentCategory = newEntity.ParentCategory
         };
     }
 }
