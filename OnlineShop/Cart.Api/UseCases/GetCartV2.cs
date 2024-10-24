@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cart.Api.UseCases;
 
-internal static class GetCartV1
+internal static class GetCartV2
 {
     public static RouteHandlerBuilder Register(IEndpointRouteBuilder routeBuilder)
     {
         return routeBuilder.MapGet("/carts/{id:guid}", Execute)
-            .WithName("GetCart V1")
+            .WithName("GetCart V2")
             .WithOpenApi();
     }
     

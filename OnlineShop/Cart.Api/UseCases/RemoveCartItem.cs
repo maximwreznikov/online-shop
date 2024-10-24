@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cart.Api.UseCases;
 
-internal static class GetCartV1
+internal static class RemoveCartItem
 {
     public static RouteHandlerBuilder Register(IEndpointRouteBuilder routeBuilder)
     {
-        return routeBuilder.MapGet("/carts/{id:guid}", Execute)
-            .WithName("GetCart V1")
+        return routeBuilder.MapDelete("/carts/{id:guid}/{itemId:int}", Execute)
+            .WithName("Remove item from cart")
             .WithOpenApi();
     }
     
     public static async Task<IResult> Execute(
         [FromRoute] Guid id,
+        [FromRoute] int itemId,
         [FromServices] ICartService cartService,
         CancellationToken cancellation)
     {

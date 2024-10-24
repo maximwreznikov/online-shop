@@ -1,19 +1,20 @@
+using Cart.Api.Dtos;
 using Cart.Core.Abstractions.Inbound;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cart.Api.UseCases;
 
-internal static class GetCartV1
+internal static class AddCartItem
 {
     public static RouteHandlerBuilder Register(IEndpointRouteBuilder routeBuilder)
     {
-        return routeBuilder.MapGet("/carts/{id:guid}", Execute)
-            .WithName("GetCart V1")
+        return routeBuilder.MapPost("/carts/{id:guid}", Execute)
             .WithOpenApi();
     }
     
     public static async Task<IResult> Execute(
         [FromRoute] Guid id,
+        [FromBody] CartItemDto itemDto,
         [FromServices] ICartService cartService,
         CancellationToken cancellation)
     {

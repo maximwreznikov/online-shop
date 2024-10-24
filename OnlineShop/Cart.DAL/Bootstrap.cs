@@ -6,12 +6,12 @@ namespace Cart.DAL;
 
 public static class Bootstrap
 {
-    public static void AddPersistence(this IServiceCollection serviceCollection, IConfigurationManager configurationManager)
+    public static void AddPersistence(this IServiceCollection services, IConfigurationManager configurationManager)
     {
-        serviceCollection.Configure<LiteDbOptions>(configurationManager.GetSection(nameof(LiteDbOptions)));
+        services.Configure<LiteDbOptions>(configurationManager.GetSection(nameof(LiteDbOptions)));
         
-        serviceCollection.AddSingleton<ILiteDbContext, LiteDbContext>();
+        services.AddSingleton<ILiteDbContext, LiteDbContext>();
         
-        serviceCollection.AddScoped<ICartRepository, CartRepository>();
+        services.AddScoped<ICartRepository, CartRepository>();
     }
 }
