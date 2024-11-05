@@ -1,0 +1,29 @@
+@Cart.Api_HostAddress = http://localhost:5182/api/
+
+### add item
+POST {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394
+Content-Type: application/json
+
+{
+  "name": "Test 2",
+  "image": "./test2.png",
+  "price": 10.5,
+  "quantity":15
+}
+
+### get cart
+
+GET {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394
+Accept: application/json
+
+### get list
+
+GET {{Cart.Api_HostAddress}}v2/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394
+Accept: application/json
+X-Api-Version: 2
+
+### remove item
+
+DELETE {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394/0
+Accept: application/json
+api-supported-versions: 2

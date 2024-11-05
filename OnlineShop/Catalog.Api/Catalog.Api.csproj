@@ -5,15 +5,11 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <RootNamespace>CatalogService</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\catalog.proto" GrpcServices="Server" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -23,8 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\Category\" />
-      <Folder Include="UseCases\Product\" />
+      <ProjectReference Include="..\Catalog.DAL\Catalog.DAL.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "Catalog.Api\Catalog.Api.csproj", "{95019A1E-EB17-4A00-BCC9-4F2CBF5473D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api.Grpc", "Catalog.Api.Grpc\Catalog.Api.Grpc.csproj", "{95019A1E-EB17-4A00-BCC9-4F2CBF5473D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Api", "Cart.Api\Cart.Api.csproj", "{76B998C1-EB67-4900-81CE-71F307F7533B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Api.Grpc", "Cart.Api.Grpc\Cart.Api.Grpc.csproj", "{76B998C1-EB67-4900-81CE-71F307F7533B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.DAL", "Cart.DAL\Cart.DAL.csproj", "{CCEA817A-1411-44D7-ABD5-08E3BFB7B15D}"
 EndProject
@@ -17,6 +17,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Core.UnitTests", "Cart.Core.UnitTests\Cart.Core.UnitTests.csproj", "{7795454E-9B16-4BD0-B7E9-AACF1B10FA05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.App.UnitTests", "Catalog.App.UnitTests\Catalog.App.UnitTests.csproj", "{56F3998A-1000-49F5-8298-504F123D33D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Api", "Cart.Api\Cart.Api.csproj", "{6299B1A7-AA25-4D72-854F-E3BEF032EE5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "Catalog.Api\Catalog.Api.csproj", "{C4526684-35B8-42F5-9BE3-BEB3937F608D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,5 +64,13 @@ Global
 		{56F3998A-1000-49F5-8298-504F123D33D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56F3998A-1000-49F5-8298-504F123D33D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56F3998A-1000-49F5-8298-504F123D33D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6299B1A7-AA25-4D72-854F-E3BEF032EE5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6299B1A7-AA25-4D72-854F-E3BEF032EE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6299B1A7-AA25-4D72-854F-E3BEF032EE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6299B1A7-AA25-4D72-854F-E3BEF032EE5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

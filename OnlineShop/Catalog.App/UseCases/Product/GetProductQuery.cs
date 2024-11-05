@@ -1,20 +1,20 @@
-using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.UseCases.Product.Dtos;
+using Catalog.Domain.Abstractions;
+using Catalog.Domain.Entities;
 using MediatR;
 
 namespace Catalog.App.UseCases.Product;
 
+public record GetProductQuery(int Id) : IRequest<ProductResponse>;
 
-
-public record GetProductQuery : IRequest<ProductResponse>
+public class GetProductQueryHandler(IRepository<ProductEntity> productRepository)
+    : IRequestHandler<GetProductQuery, ProductResponse>
 {
-    public int Id { get; init; }
-}
-
-public class CreateProductQueryHandler : IRequestHandler<GetProductQuery, ProductResponse>
-{
-    public Task<ProductResponse> Handle(GetProductQuery request, CancellationToken cancellationToken)
+    public async Task<ProductResponse> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var product = await productRepository.Get(request.Id);
+        
+        return new ProductResponse(product);
     }
 }

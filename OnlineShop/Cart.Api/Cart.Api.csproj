@@ -8,11 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\cart.proto" GrpcServices="Server" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
+        <PackageReference Include="Asp.Versioning.Abstractions" Version="8.1.0" />
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -22,7 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\" />
+      <ProjectReference Include="..\Cart.Core\Cart.Core.csproj" />
+      <ProjectReference Include="..\Cart.DAL\Cart.DAL.csproj" />
     </ItemGroup>
 
 </Project>

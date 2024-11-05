@@ -1,8 +1,7 @@
-using Catalog.App.Abstractions;
+using Catalog.Domain.Entities;
 
 namespace Catalog.DAL;
 
-public class ProductRepository : IProductRepository
+internal class ProductRepository(CatalogContext context) : Repository<ProductEntity>(context)
 {
-    
 }

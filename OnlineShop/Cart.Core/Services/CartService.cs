@@ -4,36 +4,48 @@ using Cart.Core.Entities;
 
 namespace Cart.Core.Services;
 
-public class CartService : ICartService
+public class CartService(ICartRepository cartRepository) : ICartService
 {
-    private readonly ICartRepository _cartRepository;
-    
-    public CartService(ICartRepository cartRepository)
-    {
-        _cartRepository = cartRepository;
-    }
-
     public Task<CartEntity> Get(Guid cartId)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(cartRepository.Get(cartId)!);
     }
 
-    public Task<CartEntity> AddItem(Guid cartId, int itemId, int amount)
+    public Task<CartEntity> AddItem(Guid cartId, CartItemEntity itemEntity)
     {
-        // TODO: find cart
-        
-        // TODO: add 
-        
-        // TODO: get product from Catalog?
-        
-        return Task.FromResult(new CartEntity
+        // find cart
+        var cart = cartRepository.Get(cartId) ?? new CartEntity(cartId);
+
+        // add
+        if (cart.Items == null)
         {
-            Id = cartId
-        });
+            cart.Items = [];
+            itemEntity.Id = 1;
+        }
+        else
+        {
+            // find last id 
+            var lastId = cart.Items.MaxBy(x => x.Id)?.Id ?? 0;
+            itemEntity.Id = lastId + 1;
+        }
+        
+        cart.Items.Add(itemEntity);
+        cartRepository.Update(cart);
+        
+        return Task.FromResult(cart);
     }
 
-    public Task<CartEntity> RemoveItem(Guid cartId, int itemId, int amount)
+    public Task<CartEntity> RemoveItem(Guid cartId, int itemId)
     {
-        throw new NotImplementedException();
+        // find cart
+        var cart = cartRepository.Get(cartId);
+        // remove item
+        var item = cart.Items.Find(x => x.Id == itemId);
+        if (item != null)
+        {
+            cart.Items.Remove(item);
+        }
+        // update cart
+        return Task.FromResult(cartRepository.Update(cart));
     }
 }

@@ -1,16 +1,32 @@
-using Catalog.Api.Services;
+using Catalog.App;
+using Catalog.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApp();
+builder.Services.AddPersistence(builder.Configuration);
+
 // Add services to the container.
-builder.Services.AddGrpc();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// app.Services.Migrate();
+
 // Configure the HTTP request pipeline.
-app.MapGrpcService<Catalog.Api.Services.CatalogService>();
-app.MapGet("/",
-    () =>
-        "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
 
 app.Run();
+
