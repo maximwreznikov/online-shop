@@ -21,7 +21,7 @@ public class ProductsController(IMediator mediator) : ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult<CategoryResponse>> Create([FromBody] ProductDto newProduct)
+    public async Task<CreatedResult> Create([FromBody] ProductDto newProduct)
     {
         var response = await mediator.Send(new CreateProductCommand(new ProductRequest
         {

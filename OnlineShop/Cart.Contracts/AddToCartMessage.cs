@@ -1,8 +1,10 @@
-namespace Cart.Api.Dtos;
+namespace Cart.Contracts;
 
-public record CartItemDto
+public record AddToCartMessage
 {
-    public int ProductId { get; init; }
+    public Guid CartId { get; init; } 
+    
+    public int ProductId { get; init; } 
     
     public string Name { get; init; } = string.Empty;
     
@@ -11,4 +13,4 @@ public record CartItemDto
     public decimal Price { get; init; }
     
     public int Quantity { get; init; }
-};
+}

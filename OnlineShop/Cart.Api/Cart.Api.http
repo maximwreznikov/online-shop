@@ -24,6 +24,6 @@ X-Api-Version: 2
 
 ### remove item
 
-DELETE {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394/0
+DELETE {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394/3
 Accept: application/json
 api-supported-versions: 2

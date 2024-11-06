@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Api", "Cart.Api\Cart.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "Catalog.Api\Catalog.Api.csproj", "{C4526684-35B8-42F5-9BE3-BEB3937F608D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Contracts", "Cart.Contracts\Cart.Contracts.csproj", "{C43B4300-F1F3-4C4C-9F51-4339CE9FC8A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,9 @@ Global
 		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4526684-35B8-42F5-9BE3-BEB3937F608D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C43B4300-F1F3-4C4C-9F51-4339CE9FC8A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C43B4300-F1F3-4C4C-9F51-4339CE9FC8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C43B4300-F1F3-4C4C-9F51-4339CE9FC8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C43B4300-F1F3-4C4C-9F51-4339CE9FC8A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

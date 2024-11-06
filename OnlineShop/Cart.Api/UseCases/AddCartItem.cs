@@ -23,6 +23,7 @@ internal static class AddCartItem
     {
         var newItem = new CartItemEntity
         {
+            ProductId = itemDto.ProductId,
             Image = itemDto.Image,
             Price = itemDto.Price,
             Quantity = itemDto.Quantity,

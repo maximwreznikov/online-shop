@@ -24,12 +24,22 @@ POST {{Catalog.Api_HostAddress}}/api/products
 Content-Type: application/json
 
 {
-  "name": "testProduct",
+  "name": "2",
   "description": "testProduct long Description",
   "image": null,
-  "price": 100,
+  "price": 200,
   "amount": 500,
   "category": "Test"
+}
+
+### add product to cart
+POST {{Catalog.Api_HostAddress}}/api/cart/add
+Content-Type: application/json
+
+{
+  "CartId":"3BBA0EA3-9C7C-44BB-BB56-D16DB6137394",
+  "ProductId": 1,
+  "Amount": 2
 }
 
 

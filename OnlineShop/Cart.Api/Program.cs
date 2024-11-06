@@ -1,8 +1,10 @@
 using Asp.Versioning;
 using Asp.Versioning.Builder;
+using Cart.Api.Consumers;
 using Cart.Api.UseCases;
 using Cart.Core;
 using Cart.DAL;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -17,23 +19,38 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1);
+    options.ApiVersionSelector = new DefaultApiVersionSelector(new ApiVersioningOptions
     {
-        options.DefaultApiVersion = new ApiVersion(1);
-        options.ApiVersionSelector = new DefaultApiVersionSelector(new ApiVersioningOptions
-        {
-            DefaultApiVersion = new ApiVersion(1.0),
-        });
-        options.ReportApiVersions = true;
-        options.AssumeDefaultVersionWhenUnspecified = true;
-        options.ApiVersionReader = ApiVersionReader.Combine(
-            new UrlSegmentApiVersionReader(),
-            new HeaderApiVersionReader("X-Api-Version"));
-    })
-    .AddApiExplorer(options =>
-    {
-        options.GroupNameFormat = "'v'V";
-        options.SubstituteApiVersionInUrl = true;
+        DefaultApiVersion = new ApiVersion(1.0),
     });
+    options.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ApiVersionReader = ApiVersionReader.Combine(
+        new UrlSegmentApiVersionReader(),
+        new HeaderApiVersionReader("X-Api-Version"));
+})
+.AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'V";
+    options.SubstituteApiVersionInUrl = true;
+});
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<AddToCartConsumer>();
+
+    x.UsingRabbitMq((context,cfg) =>
+    {
+        cfg.Host("localhost", "/", h => {
+            h.Username("test");
+            h.Password("test");
+        });
+        
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 var app = builder.Build();
 

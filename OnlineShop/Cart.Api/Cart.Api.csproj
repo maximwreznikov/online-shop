@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Abstractions" Version="8.1.0" />
         <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
@@ -21,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Cart.Contracts\Cart.Contracts.csproj" />
       <ProjectReference Include="..\Cart.Core\Cart.Core.csproj" />
       <ProjectReference Include="..\Cart.DAL\Cart.DAL.csproj" />
     </ItemGroup>
