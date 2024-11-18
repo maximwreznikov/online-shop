@@ -10,6 +10,17 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+        
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak_dev
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=change_me
+    command:
+      - start-dev
+    ports:
+      - "8080:8080"
 
 networks:
   default:
