@@ -3,6 +3,7 @@ using Catalog.Api.Dtos;
 using Catalog.App.UseCases.Product;
 using MassTransit;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Controllers;
@@ -12,6 +13,7 @@ namespace Catalog.Api.Controllers;
 public class CartController(IMediator mediator, IBus bus) : ControllerBase
 {
     [HttpPost("add")]
+    [Authorize(Policy = PolicyConstants.CustomerPolicy)]
     public async Task<ActionResult> Add([FromBody] AddToCartDto item, CancellationToken cancellationToken)
     {
         var product = await mediator.Send(new GetProductQuery(item.ProductId), cancellationToken);

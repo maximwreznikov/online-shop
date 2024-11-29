@@ -1,0 +1,30 @@
+@Auth.Api_HostAddress = http://localhost:8080/realms/master/protocol/openid-connect/token
+@ClientId = test_online_shop
+@ClientSecret = EYBfEbKXBvBtiDoIBLlqSfRYD8PJm98K
+
+### Get token Manager
+
+POST {{Auth.Api_HostAddress}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password &
+client_id={{ClientId}} &
+client_secret={{ClientSecret}} &
+username=test_manager &
+password=test_manager
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+
+### Get token Customer
+
+POST {{Auth.Api_HostAddress}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password &
+client_id={{ClientId}} &
+client_secret={{ClientSecret}} &
+username=test_customer &
+password=test_customer
+
+> {% client.global.set("auth_token", response.body.access_token); %}

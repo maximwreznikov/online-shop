@@ -13,7 +13,6 @@ builder.Services.AddApp();
 builder.Services.AddPersistence(builder.Configuration);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -38,17 +37,22 @@ builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration, o =>
 
 builder.Services
     .AddAuthorization(o =>
-        o.AddPolicy(
-            "IsAdmin",
-            b =>
-            {
-                b.RequireRealmRoles("admin");
-                b.RequireResourceRoles("r-admin");
-                // TokenValidationParameters.RoleClaimType is overridden
-                // by KeycloakRolesClaimsTransformation
-                b.RequireRole("r-admin");
-            }
-        )
+        {
+            o.AddPolicy(
+                PolicyConstants.ManagerPolicy,
+                b =>
+                {
+                    b.RequireResourceRoles(RolesConstants.Manager);
+                }
+            );
+            o.AddPolicy(
+                PolicyConstants.CustomerPolicy,
+                b =>
+                {
+                    b.RequireResourceRoles(RolesConstants.Customer);
+                }
+            );
+        }
     )
     .AddKeycloakAuthorization(builder.Configuration)
     .AddAuthorizationServer(builder.Configuration);
@@ -59,7 +63,7 @@ builder.Services.AddSwagger();
 
 var app = builder.Build();
 
-// app.Services.Migrate();
+app.Services.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -67,7 +71,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger()
         .UseSwaggerUI(o =>
         {
-            o.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalor API v1");
+            o.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog API v1");
             o.DocExpansion(DocExpansion.List);
             o.EnableDeepLinking();
 

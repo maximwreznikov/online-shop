@@ -1,18 +1,27 @@
 @Catalog.Api_HostAddress = http://localhost:5229
+@auth_token = "" # call auth api before
 
 GET {{Catalog.Api_HostAddress}}/api/categories
+Authorization: Bearer {{auth_token}}
 Accept: application/json
 
 ###
 
 POST {{Catalog.Api_HostAddress}}/api/categories
+Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
-  "name": "Test",
+  "name": "Auth test 2",
   "image": null,
   "parentCategory": null
 }
+
+### delete caterory
+
+DELETE {{Catalog.Api_HostAddress}}/api/categories/3
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
 
 ### get products
 GET {{Catalog.Api_HostAddress}}/api/products
@@ -21,6 +30,7 @@ Accept: application/json
 
 ### create product
 POST {{Catalog.Api_HostAddress}}/api/products
+Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {

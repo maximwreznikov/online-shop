@@ -1,5 +1,4 @@
 ﻿using Catalog.Api.Dtos;
-using Catalog.App.Dtos;
 using Catalog.App.UseCases.Category;
 using Catalog.App.UseCases.Category.Dtos;
 using MediatR;
@@ -20,7 +19,7 @@ public class CategoriesController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Manager")]
+    [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<ActionResult<CategoryResponse>> Create([FromBody] CategoryDto newCategory)
     {
         var response = await mediator.Send(new CreateCategoryCommand(new CategoryRequest
@@ -32,8 +31,8 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         return Created($"/cart/{response.Id}", response);
     }
 
-    [HttpPut("id")]
-    [Authorize(Roles = "Manager")]
+    [HttpPut("{id:int}")]
+    [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<ActionResult<CategoryResponse>> Update([FromRoute] int id, [FromBody] CategoryDto newCategory)
     {
         var response = await mediator.Send(new UpdateCategoryCommand(new UpdateCategoryRequest
@@ -46,8 +45,8 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete("id")]
-    [Authorize(Roles = "Manager")]
+    [HttpDelete("{id:int}")]
+    [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<ActionResult<CategoryResponse>> Delete([FromRoute] int id)
     {
         var response = await mediator.Send(new RemoveCategoryCommand(id));

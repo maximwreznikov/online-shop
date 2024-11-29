@@ -19,7 +19,7 @@ public class ProductsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Manager")]
+    [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<CreatedResult> Create([FromBody] ProductDto newProduct)
     {
         var response = await mediator.Send(new CreateProductCommand(new ProductRequest
@@ -35,7 +35,7 @@ public class ProductsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPut("id")]
-    [Authorize(Roles = "Manager")]
+    [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<ActionResult<ProductResponse>> Update([FromRoute] int id, [FromBody] ProductDto newProduct)
     {
         var response = await mediator.Send(new UpdateProductCommand(new UpdateProductRequest
@@ -52,7 +52,7 @@ public class ProductsController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("id")]
-    [Authorize(Roles = "Manager")]
+    [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<ActionResult<ProductResponse>> Delete([FromRoute] int id)
     {
         var response = await mediator.Send(new RemoveProductCommand(id));
