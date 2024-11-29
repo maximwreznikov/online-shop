@@ -1,4 +1,4 @@
-using Cart.Core.Abstractions.Outbound;
+﻿using Cart.Core.Abstractions.Outbound;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,9 +9,9 @@ public static class Bootstrap
     public static void AddPersistence(this IServiceCollection services, IConfigurationManager configurationManager)
     {
         services.Configure<LiteDbOptions>(configurationManager.GetSection(nameof(LiteDbOptions)));
-        
+
         services.AddSingleton<ILiteDbContext, LiteDbContext>();
-        
+
         services.AddScoped<ICartRepository, CartRepository>();
     }
 }

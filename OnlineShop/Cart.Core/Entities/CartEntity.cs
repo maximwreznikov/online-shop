@@ -1,4 +1,4 @@
-namespace Cart.Core.Entities;
+﻿namespace Cart.Core.Entities;
 
 public class CartEntity
 {
@@ -8,7 +8,7 @@ public class CartEntity
 
     public CartEntity()
     {
-        
+
     }
 
     public CartEntity(Guid id)

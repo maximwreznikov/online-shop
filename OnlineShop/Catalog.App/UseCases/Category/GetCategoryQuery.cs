@@ -1,4 +1,4 @@
-using Catalog.App.Dtos;
+﻿using Catalog.App.Dtos;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -17,9 +17,9 @@ public class GetCategoryQueryHandler(IRepository<CategoryEntity> categoryReposit
 
         return new CategoryResponse
         {
-            Id = category.Id, 
-            Name = category.Name, 
-            Image = category.Image, 
+            Id = category.Id,
+            Name = category.Name,
+            Image = category.Image,
             ParentCategory = category.ParentCategory
         };
     }

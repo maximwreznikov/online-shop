@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using Catalog.App.Specifications;
 using Catalog.App.UseCases.Product.Dtos;
@@ -11,8 +11,8 @@ namespace Catalog.App.UseCases.Product;
 public record CreateProductCommand(ProductRequest Product) : IRequest<ProductResponse>;
 
 public class CreateProductCommandHandler(
-    IRepository<ProductEntity> productRepository, 
-    IRepository<CategoryEntity> categoryRepository, 
+    IRepository<ProductEntity> productRepository,
+    IRepository<CategoryEntity> categoryRepository,
     IUnitOfWork unitOfWork)
     : IRequestHandler<CreateProductCommand, ProductResponse>
 {
@@ -32,10 +32,10 @@ public class CreateProductCommandHandler(
             new ByNameFilter<CategoryEntity>(newProduct.Category));
 
         product.CategoryId = category.Id;
-        
+
         await productRepository.Create(product);
         await unitOfWork.Save(cancellationToken);
-        
-        return new ProductResponse (product);
+
+        return new ProductResponse(product);
     }
 }

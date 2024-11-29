@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
@@ -10,7 +10,7 @@ namespace Catalog.App.UseCases.Product;
 public record RemoveProductCommand(int Id) : IRequest<ProductResponse>;
 
 public class RemoveProductCommandHandler(
-    IRepository<ProductEntity> productRepository, 
+    IRepository<ProductEntity> productRepository,
     IUnitOfWork unitOfWork)
     : IRequestHandler<RemoveProductCommand, ProductResponse>
 {

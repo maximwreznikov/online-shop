@@ -1,4 +1,4 @@
-using Catalog.App.Specifications;
+﻿using Catalog.App.Specifications;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -13,14 +13,14 @@ public class GetCategoriesQueryHandler(IRepository<CategoryEntity> categoryRepos
 {
     public async Task<IEnumerable<CategoryResponse>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var products = await categoryRepository.Find(request.Skip, request.Take, 
+        var products = await categoryRepository.Find(request.Skip, request.Take,
             new EmptyFilter<CategoryEntity>());
-        
+
         return products.Select(x => new CategoryResponse
         {
-            Id = x.Id, 
+            Id = x.Id,
             Name = x.Name,
-            Image = x.Image, 
+            Image = x.Image,
             ParentCategory = x.ParentCategory
         });
     }

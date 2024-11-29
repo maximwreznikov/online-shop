@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using Catalog.App.Specifications;
 using Catalog.App.UseCases.Category.Dtos;
@@ -12,7 +12,7 @@ namespace Catalog.App.UseCases.Category;
 public record CreateCategoryCommand(CategoryRequest Category) : IRequest<CategoryResponse>;
 
 public class CreateCategoryCommandHandler(
-    IRepository<CategoryEntity> categoryRepository, 
+    IRepository<CategoryEntity> categoryRepository,
     IUnitOfWork unitOfWork)
     : IRequestHandler<CreateCategoryCommand, CategoryResponse>
 {
@@ -32,10 +32,10 @@ public class CreateCategoryCommandHandler(
 
             newEntity.ParentCategoryId = parentCategory.Id;
         }
-        
+
         await categoryRepository.Create(newEntity);
         await unitOfWork.Save(cancellationToken);
-        
+
         return new CategoryResponse
         {
             Id = newEntity.Id,

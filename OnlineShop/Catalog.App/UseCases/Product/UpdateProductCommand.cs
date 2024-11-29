@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using Catalog.App.Specifications;
 using Catalog.App.UseCases.Product.Dtos;
@@ -12,7 +12,7 @@ public record UpdateProductCommand(UpdateProductRequest Product) : IRequest<Prod
 
 public class UpdateProductCommandHandler(
     IRepository<ProductEntity> productRepository,
-    IRepository<CategoryEntity> categoryRepository, 
+    IRepository<CategoryEntity> categoryRepository,
     IUnitOfWork unitOfWork
     )
     : IRequestHandler<UpdateProductCommand, ProductResponse>
@@ -27,15 +27,15 @@ public class UpdateProductCommandHandler(
         product.Image = newProduct.Image;
         product.Price = newProduct.Price;
         product.Amount = newProduct.Amount;
-        
+
         var category = await categoryRepository.FindSingle(
             new ByNameFilter<CategoryEntity>(newProduct.Category));
 
         product.CategoryId = category.Id;
-        
+
         await productRepository.Update(product);
         await unitOfWork.Save(cancellationToken);
-        
+
         return new ProductResponse(product);
     }
 }

@@ -1,4 +1,4 @@
-namespace Catalog.Api.Dtos;
+﻿namespace Catalog.Api.Dtos;
 
 public record CategoryDto(
     string Name,

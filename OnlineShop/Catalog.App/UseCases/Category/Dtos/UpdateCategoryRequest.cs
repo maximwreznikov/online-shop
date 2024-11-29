@@ -1,4 +1,4 @@
-namespace Catalog.App.UseCases.Category.Dtos;
+﻿namespace Catalog.App.UseCases.Category.Dtos;
 
 public record UpdateCategoryRequest : CategoryRequest
 {

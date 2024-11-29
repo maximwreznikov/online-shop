@@ -1,4 +1,4 @@
-using Cart.Core.Abstractions.Outbound;
+﻿using Cart.Core.Abstractions.Outbound;
 using Cart.Core.Entities;
 using Cart.Core.Services;
 using NSubstitute;
@@ -19,7 +19,7 @@ public class CartServiceTests
         var cartEntity = new CartEntity
         {
             Id = testCartId,
-            Items = [new CartItemEntity{Id = testItemId}]
+            Items = [new CartItemEntity { Id = testItemId }]
         };
         _mockCartRepository.Get(testCartId).Returns(cartEntity);
         var newCartItemEntity = new CartItemEntity

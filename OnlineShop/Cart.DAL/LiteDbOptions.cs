@@ -1,4 +1,4 @@
-namespace Cart.DAL;
+﻿namespace Cart.DAL;
 
 public class LiteDbOptions
 {

@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
@@ -10,7 +10,7 @@ namespace Catalog.App.UseCases.Category;
 public record RemoveCategoryCommand(int Id) : IRequest<CategoryResponse>;
 
 public class RemoveCategoryCommandHandler(
-    IRepository<CategoryEntity> categoryRepository, 
+    IRepository<CategoryEntity> categoryRepository,
     IUnitOfWork unitOfWork)
     : IRequestHandler<RemoveCategoryCommand, CategoryResponse>
 {
@@ -19,7 +19,7 @@ public class RemoveCategoryCommandHandler(
         var category = await categoryRepository.Get(command.Id);
         await categoryRepository.Delete(category);
         await unitOfWork.Save(cancellationToken);
-        
+
         return new CategoryResponse
         {
             Id = category.Id,

@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +25,7 @@ internal class Repository<T>(CatalogContext context) : IRepository<T> where T : 
     {
         context.Set<T>().Remove(item);
     }
-    
+
     public Task<List<T>> Find(int skip, int take, ISpecification<T> specification)
     {
         return specification.Query(context.Set<T>())

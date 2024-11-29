@@ -1,4 +1,4 @@
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Asp.Versioning.Builder;
 using Cart.Api.Consumers;
 using Cart.Api.UseCases;
@@ -41,13 +41,14 @@ builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<AddToCartConsumer>();
 
-    x.UsingRabbitMq((context,cfg) =>
+    x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost", "/", h => {
+        cfg.Host("localhost", "/", h =>
+        {
             h.Username("test");
             h.Password("test");
         });
-        
+
         cfg.ConfigureEndpoints(context);
     });
 });

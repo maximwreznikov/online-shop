@@ -1,4 +1,4 @@
-using Cart.Core.Abstractions.Inbound;
+﻿using Cart.Core.Abstractions.Inbound;
 using Cart.Core.Abstractions.Outbound;
 using Cart.Core.Entities;
 
@@ -28,10 +28,10 @@ public class CartService(ICartRepository cartRepository) : ICartService
             var lastId = cart.Items.MaxBy(x => x.Id)?.Id ?? 0;
             itemEntity.Id = lastId + 1;
         }
-        
+
         cart.Items.Add(itemEntity);
         cartRepository.Update(cart);
-        
+
         return Task.FromResult(cart);
     }
 

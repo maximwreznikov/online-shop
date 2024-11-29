@@ -1,4 +1,4 @@
-using Catalog.Domain.Abstractions;
+﻿using Catalog.Domain.Abstractions;
 
 namespace Catalog.App.Specifications;
 

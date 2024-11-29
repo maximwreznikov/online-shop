@@ -1,6 +1,6 @@
-namespace Catalog.App.Abstractions;
+﻿namespace Catalog.App.Abstractions;
 
 public interface IProductRepository
 {
-    
+
 }

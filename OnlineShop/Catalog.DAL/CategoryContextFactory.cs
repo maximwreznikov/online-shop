@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Catalog.DAL;
@@ -12,7 +12,7 @@ internal class CategoryContextFactory : IDesignTimeDbContextFactory<CatalogConte
 
         return new CatalogContext(optionsBuilder.Options);
     }
-    
+
     public static void Migrate(IDbContextFactory<CatalogContext> factory)
     {
         using var context = factory.CreateDbContext();

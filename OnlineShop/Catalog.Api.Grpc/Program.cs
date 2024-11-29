@@ -1,4 +1,4 @@
-using Catalog.Api.Grpc.Services;
+﻿using Catalog.Api.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

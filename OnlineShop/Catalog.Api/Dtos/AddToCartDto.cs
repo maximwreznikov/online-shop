@@ -1,4 +1,4 @@
-namespace Catalog.Api.Dtos;
+﻿namespace Catalog.Api.Dtos;
 
 public record AddToCartDto
 (
@@ -6,4 +6,3 @@ public record AddToCartDto
     int ProductId,
     int Amount
 );
-    

@@ -1,4 +1,4 @@
-using Catalog.App.Specifications;
+﻿using Catalog.App.Specifications;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -13,9 +13,9 @@ public class GetProductListQueryHandler(IRepository<ProductEntity> productReposi
 {
     public async Task<IEnumerable<ProductResponse>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
     {
-        var products = await productRepository.Find(request.Skip, request.Take, 
+        var products = await productRepository.Find(request.Skip, request.Take,
             new EmptyFilter<ProductEntity>());
-        
+
         return products.Select(x => new ProductResponse(x));
     }
 }

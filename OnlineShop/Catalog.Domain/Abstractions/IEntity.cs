@@ -1,4 +1,4 @@
-namespace Catalog.Domain.Abstractions;
+﻿namespace Catalog.Domain.Abstractions;
 
 public interface IEntity
 {

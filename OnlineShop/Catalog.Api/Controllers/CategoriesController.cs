@@ -1,8 +1,9 @@
-using Catalog.Api.Dtos;
+﻿using Catalog.Api.Dtos;
 using Catalog.App.Dtos;
 using Catalog.App.UseCases.Category;
 using Catalog.App.UseCases.Category.Dtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Controllers;
@@ -17,8 +18,9 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         var categories = await mediator.Send(new GetCategoriesQuery(skip, take));
         return Ok(categories);
     }
-    
+
     [HttpPost]
+    [Authorize(Roles = "Manager")]
     public async Task<ActionResult<CategoryResponse>> Create([FromBody] CategoryDto newCategory)
     {
         var response = await mediator.Send(new CreateCategoryCommand(new CategoryRequest
@@ -29,8 +31,9 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         }));
         return Created($"/cart/{response.Id}", response);
     }
-    
+
     [HttpPut("id")]
+    [Authorize(Roles = "Manager")]
     public async Task<ActionResult<CategoryResponse>> Update([FromRoute] int id, [FromBody] CategoryDto newCategory)
     {
         var response = await mediator.Send(new UpdateCategoryCommand(new UpdateCategoryRequest
@@ -42,9 +45,10 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         }));
         return Ok(response);
     }
-    
+
     [HttpDelete("id")]
-    public async Task<ActionResult<CategoryResponse>> Delete([FromRoute]int id)
+    [Authorize(Roles = "Manager")]
+    public async Task<ActionResult<CategoryResponse>> Delete([FromRoute] int id)
     {
         var response = await mediator.Send(new RemoveCategoryCommand(id));
         return Ok(response);

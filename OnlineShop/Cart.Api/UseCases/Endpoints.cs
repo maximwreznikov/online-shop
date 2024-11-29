@@ -1,4 +1,4 @@
-
+﻿
 using Asp.Versioning.Builder;
 
 namespace Cart.Api.UseCases;
@@ -10,7 +10,7 @@ public static class Endpoints
         AddCartItem.Register(group)
             .WithApiVersionSet(apiVersionSet)
             .MapToApiVersion(1);
-        
+
         GetCartV1.Register(group)
             .WithApiVersionSet(apiVersionSet)
             .MapToApiVersion(1);
@@ -19,7 +19,7 @@ public static class Endpoints
             .WithApiVersionSet(apiVersionSet)
             .MapToApiVersion(1);
     }
-    
+
     public static void MapV2(RouteGroupBuilder group, ApiVersionSet apiVersionSet)
     {
         GetCartV2.Register(group)

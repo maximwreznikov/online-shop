@@ -1,4 +1,4 @@
-using Catalog.App.Abstractions;
+﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
 using Catalog.App.Specifications;
 using Catalog.App.UseCases.Category.Dtos;
@@ -23,7 +23,7 @@ public class UpdateCategoryCommandHandler(
 
         category.Name = newCategory.Name;
         category.Image = newCategory.Image;
-        
+
         if (!string.IsNullOrEmpty(newCategory.ParentCategory))
         {
             var parentCategory = await categoryRepository.FindSingle(
@@ -37,7 +37,7 @@ public class UpdateCategoryCommandHandler(
             category.ParentCategoryId = null;
             category.ParentCategory = null;
         }
-        
+
         await categoryRepository.Update(category);
         await unitOfWork.Save(cancellationToken);
         return new CategoryResponse

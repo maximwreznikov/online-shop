@@ -1,4 +1,4 @@
-using Catalog.App.Specifications;
+﻿using Catalog.App.Specifications;
 using Catalog.App.UseCases.Product;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -20,8 +20,8 @@ public class GetProductListTests
             new ProductEntity{ Id = 1},
             new ProductEntity{ Id = 2}
         };
-        
-        _mockCartRepository.Find(0, 100, 
+
+        _mockCartRepository.Find(0, 100,
             Arg.Is<ISpecification<ProductEntity>>(x => x is EmptyFilter<ProductEntity>))
             .Returns(Task.FromResult(list));
         var newQuery = new GetProductListQuery(0, 100);
