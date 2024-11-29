@@ -1,7 +1,4 @@
 ﻿using Catalog.Api.Dtos;
-using Catalog.App.Dtos;
-using Catalog.App.UseCases.Category;
-using Catalog.App.UseCases.Category.Dtos;
 using Catalog.App.UseCases.Product;
 using Catalog.App.UseCases.Product.Dtos;
 using MediatR;

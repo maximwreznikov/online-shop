@@ -19,7 +19,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         // add
         if (cart.Items == null)
         {
-            cart.Items = [];
+            cart.Items = [ ];
             itemEntity.Id = 1;
         }
         else

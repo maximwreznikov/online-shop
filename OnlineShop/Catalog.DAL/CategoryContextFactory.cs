@@ -5,7 +5,7 @@ namespace Catalog.DAL;
 
 internal class CategoryContextFactory : IDesignTimeDbContextFactory<CatalogContext>
 {
-    public CatalogContext CreateDbContext(string[] args)
+    public CatalogContext CreateDbContext(string[ ] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>();
         optionsBuilder.UseSqlite("Data Source=../db/sql_main.db");
