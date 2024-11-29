@@ -2,6 +2,7 @@
 
 ### add item
 POST {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394
+Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
@@ -12,18 +13,18 @@ Content-Type: application/json
 }
 
 ### get cart
-
 GET {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394
+Authorization: Bearer {{auth_token}}
 Accept: application/json
 
 ### get list
-
 GET {{Cart.Api_HostAddress}}v2/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394
+Authorization: Bearer {{auth_token}}
 Accept: application/json
 X-Api-Version: 2
 
 ### remove item
-
 DELETE {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394/3
+Authorization: Bearer {{auth_token}}
 Accept: application/json
 api-supported-versions: 2

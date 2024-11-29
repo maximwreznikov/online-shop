@@ -11,7 +11,8 @@ internal static class RemoveCartItem
         return routeBuilder.MapDelete("/carts/{id:guid}/{itemId:int}", Execute)
             .Produces<CartEntity>()
             .WithName("Remove item from cart")
-            .WithOpenApi();
+            .WithOpenApi()
+            .RequireAuthorization();
     }
 
     private static async Task<IResult> Execute(

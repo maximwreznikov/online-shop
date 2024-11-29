@@ -12,7 +12,8 @@ internal static class AddCartItem
         return routeBuilder.MapPost("/carts/{id:guid}", Execute)
             .Produces<CartEntity>()
             .WithName("Add item to cart")
-            .WithOpenApi();
+            .WithOpenApi()
+            .RequireAuthorization();
     }
 
     private static async Task<IResult> Execute(

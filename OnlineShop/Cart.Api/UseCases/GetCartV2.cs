@@ -11,7 +11,8 @@ internal static class GetCartV2
         return routeBuilder.MapGet("/carts/{id:guid}", Execute)
             .Produces<IEnumerable<CartItemEntity>>()
             .WithName("GetCart V2")
-            .WithOpenApi();
+            .WithOpenApi()
+            .RequireAuthorization();
     }
 
     private static async Task<IResult> Execute(

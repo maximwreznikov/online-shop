@@ -1,9 +1,12 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.Builder;
+using Cart.Api;
 using Cart.Api.Consumers;
 using Cart.Api.UseCases;
 using Cart.Core;
 using Cart.DAL;
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +56,16 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration, o =>
+{
+    o.RequireHttpsMetadata = false;
+});
+
+builder.Services
+    .AddAuthorization()
+    .AddKeycloakAuthorization(builder.Configuration)
+    .AddAuthorizationServer(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -64,6 +77,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app
+    .UseAuthentication()
+    .UseAuthorization();
+
+app.UseLogRoles();
 
 ApiVersionSet apiVersionSet = app.NewApiVersionSet()
     .HasApiVersion(new ApiVersion(1))

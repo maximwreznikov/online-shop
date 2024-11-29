@@ -30,6 +30,8 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+
+// init auth
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration, o =>
 {
     o.RequireHttpsMetadata = false;
@@ -78,15 +80,16 @@ if (app.Environment.IsDevelopment())
             // Enable OAuth2 authorization support in Swagger UI
             o.OAuthClientId("test_online_shop");
             o.OAuthAppName("Swagger");
-        })
-        .UseAuthentication()
-        .UseAuthorization();
+        });
 }
 
 app.UseHttpsRedirection();
 
-app.MapControllers();
+app
+    .UseAuthentication()
+    .UseAuthorization();
 
+app.MapControllers();
 
 app.Run();
 
