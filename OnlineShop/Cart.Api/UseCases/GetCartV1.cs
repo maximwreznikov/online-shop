@@ -17,8 +17,7 @@ internal static class GetCartV1
 
     private static async Task<IResult> Execute(
         [FromRoute] Guid id,
-        [FromServices] ICartService cartService,
-        CancellationToken cancellation)
+        [FromServices] ICartService cartService)
     {
         var cartEntity = await cartService.Get(id);
         return Results.Ok(cartEntity);

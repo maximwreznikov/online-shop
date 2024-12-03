@@ -91,4 +91,4 @@ ApiVersionSet apiVersionSet = app.NewApiVersionSet()
 Endpoints.MapV1(app.MapGroup("api/v1"), apiVersionSet);
 Endpoints.MapV2(app.MapGroup("api/v2"), apiVersionSet);
 
-app.Run();
+await app.RunAsync();

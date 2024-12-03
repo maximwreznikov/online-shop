@@ -15,11 +15,11 @@ public class CartServiceTests
         // arrange
         var testService = new CartService(_mockCartRepository);
         var testCartId = Guid.NewGuid();
-        var testItemId = 5;
+        int testItemId = 5;
         var cartEntity = new CartEntity
         {
             Id = testCartId,
-            Items = [new CartItemEntity { Id = testItemId }]
+            Items = []
         };
         _mockCartRepository.Get(testCartId).Returns(cartEntity);
         var newCartItemEntity = new CartItemEntity
@@ -36,6 +36,7 @@ public class CartServiceTests
 
         // assert
         Assert.That(cart.Id, Is.EqualTo(testCartId));
-        Assert.That(cart.Items.Count, Is.EqualTo(1));
+        Assert.That(cart.Items, Is.Not.Null);
+        Assert.That(cart.Items, Has.Count.EqualTo(1));
     }
 }

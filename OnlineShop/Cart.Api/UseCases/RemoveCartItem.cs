@@ -18,8 +18,7 @@ internal static class RemoveCartItem
     private static async Task<IResult> Execute(
         [FromRoute] Guid id,
         [FromRoute] int itemId,
-        [FromServices] ICartService cartService,
-        CancellationToken cancellation)
+        [FromServices] ICartService cartService)
     {
         var entity = await cartService.RemoveItem(id, itemId);
         return Results.Ok(entity);

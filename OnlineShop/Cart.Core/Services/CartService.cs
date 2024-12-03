@@ -24,7 +24,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         }
         else
         {
-            // find last id 
+            // find last id
             var lastId = cart.Items.MaxBy(x => x.Id)?.Id ?? 0;
             itemEntity.Id = lastId + 1;
         }
@@ -38,7 +38,8 @@ public class CartService(ICartRepository cartRepository) : ICartService
     public Task<CartEntity> RemoveItem(Guid cartId, int itemId)
     {
         // find cart
-        var cart = cartRepository.Get(cartId);
+        var cart = cartRepository.Get(cartId) ?? throw new KeyNotFoundException($"No cart with id {cartId}");
+
         // remove item
         var item = cart.Items.Find(x => x.Id == itemId);
         if (item != null)

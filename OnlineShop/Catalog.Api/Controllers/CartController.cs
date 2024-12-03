@@ -1,4 +1,5 @@
-﻿using Cart.Contracts;
+﻿using System.ComponentModel.DataAnnotations;
+using Cart.Contracts;
 using Catalog.Api.Dtos;
 using Catalog.App.UseCases.Product;
 using MassTransit;

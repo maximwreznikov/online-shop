@@ -1,8 +1,10 @@
-﻿namespace Catalog.Api.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Catalog.Api.Dtos;
 
 public record AddToCartDto
 (
-    Guid CartId,
-    int ProductId,
-    int Amount
+    [Required] Guid CartId,
+    [Required] int ProductId,
+    [Required] int Amount
 );

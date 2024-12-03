@@ -7,3 +7,7 @@ docker-compose up -d
 Client ID=test_online_shop
 Client Secret=EYBfEbKXBvBtiDoIBLlqSfRYD8PJm98K
 
+## Launch Sonar
+
+docker run --rm -p 9000:9000 -v sonarqube_extensions:/opt/sonarqube/extensions sonarqube
+

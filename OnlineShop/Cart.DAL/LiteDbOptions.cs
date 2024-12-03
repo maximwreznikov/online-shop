@@ -1,6 +1,8 @@
-﻿namespace Cart.DAL;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Cart.DAL;
 
 public class LiteDbOptions
 {
-    public string DatabaseLocation { get; set; }
+    [Required] public string DatabaseLocation { get; set; } = string.Empty;
 }

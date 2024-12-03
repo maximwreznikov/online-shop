@@ -19,8 +19,7 @@ internal static class AddCartItem
     private static async Task<IResult> Execute(
         [FromRoute] Guid id,
         [FromBody] CartItemDto itemDto,
-        [FromServices] ICartService cartService,
-        CancellationToken cancellation)
+        [FromServices] ICartService cartService)
     {
         var newItem = new CartItemEntity
         {

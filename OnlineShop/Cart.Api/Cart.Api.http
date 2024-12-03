@@ -1,4 +1,5 @@
 @Cart.Api_HostAddress = http://localhost:5182/api/
+@auth_token = "" # call auth api before
 
 ### add item
 POST {{Cart.Api_HostAddress}}v1/carts/3BBA0EA3-9C7C-44BB-BB56-D16DB6137394

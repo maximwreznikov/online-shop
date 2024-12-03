@@ -1,7 +1,10 @@
-﻿namespace Catalog.Api.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Catalog.Api.Dtos;
 
 public record ProductDto
 {
+    [Required]
     public string Name { get; init; } = string.Empty;
 
     public string? Description { get; init; }
@@ -9,9 +12,12 @@ public record ProductDto
     // Url
     public string? Image { get; init; }
 
+    [Required]
     public decimal Price { get; init; }
 
+    [Required]
     public uint Amount { get; init; }
 
+    [Required]
     public string Category { get; init; } = null!;
 };
