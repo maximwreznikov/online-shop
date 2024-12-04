@@ -2,8 +2,9 @@
 using Cart.Core.Abstractions.Inbound;
 using Cart.Core.Entities;
 using MassTransit;
+using Microsoft.Extensions.Logging;
 
-namespace Cart.Api.Consumers;
+namespace Cart.Queue.Consumers;
 
 public class AddToCartConsumer(ICartService cartService, ILogger<AddToCartConsumer> logger) : IConsumer<AddToCartMessage>
 {

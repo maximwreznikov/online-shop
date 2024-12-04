@@ -1,12 +1,6 @@
 ﻿namespace Catalog.App.Exceptions;
 
-public class NotFoundEntity : Exception
+public class NotFoundEntity(string entityName) : Exception
 {
-    public NotFoundEntity(string entityName)
-    {
-        EntityName = entityName;
-    }
-
-    public string EntityName { get; private set; }
-
+    public string EntityName { get; private set; } = entityName;
 }

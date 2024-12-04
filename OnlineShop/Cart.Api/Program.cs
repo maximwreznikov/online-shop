@@ -1,14 +1,12 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.Builder;
 using Cart.Api;
-using Cart.Api.Consumers;
 using Cart.Api.UseCases;
 using Cart.Core;
 using Cart.DAL;
+using Cart.Queue;
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
-using MassTransit;
-using Microsoft.AspNetCore.Mvc;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,21 +38,7 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
-builder.Services.AddMassTransit(x =>
-{
-    x.AddConsumer<AddToCartConsumer>();
-
-    x.UsingRabbitMq((context, cfg) =>
-    {
-        cfg.Host("localhost", "/", h =>
-        {
-            h.Username("test");
-            h.Password("test");
-        });
-
-        cfg.ConfigureEndpoints(context);
-    });
-});
+builder.Services.AddMessageQueue(builder.Configuration);
 
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration, o =>
 {

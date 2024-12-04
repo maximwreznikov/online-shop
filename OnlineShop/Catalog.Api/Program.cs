@@ -1,4 +1,5 @@
-﻿using Catalog.Api;
+﻿using Cart.Contracts.Settings;
+using Catalog.Api;
 using Catalog.App;
 using Catalog.DAL;
 using Keycloak.AuthServices.Authentication;
@@ -16,14 +17,18 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+var settingsSection = builder.Configuration.GetSection(nameof(RabbitSettings));
+var settings = new RabbitSettings();
+settingsSection.Bind(settings);
+
 builder.Services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost", "/", h =>
+        cfg.Host(settings.Host, "/", h =>
         {
-            h.Username("test");
-            h.Password("test");
+            h.Username(settings.Username);
+            h.Password(settings.Password);
         });
 
         cfg.ConfigureEndpoints(context);

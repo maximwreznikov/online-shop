@@ -1,4 +1,5 @@
 ﻿using Catalog.App.Dtos;
+using Catalog.App.Exceptions;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -13,7 +14,7 @@ public class GetProductQueryHandler(IRepository<ProductEntity> productRepository
 {
     public async Task<ProductResponse> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
-        var product = await productRepository.Get(request.Id);
+        var product = await productRepository.Get(request.Id) ?? throw new NotFoundEntity(nameof(ProductEntity));
 
         return new ProductResponse(product);
     }

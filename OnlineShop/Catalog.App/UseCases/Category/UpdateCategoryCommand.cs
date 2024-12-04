@@ -1,5 +1,6 @@
 ﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Exceptions;
 using Catalog.App.Specifications;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
@@ -20,6 +21,10 @@ public class UpdateCategoryCommandHandler(
     {
         var newCategory = request.Category;
         var category = await categoryRepository.Get(newCategory.Id);
+        if (category == null)
+        {
+            throw new NotFoundEntity(nameof(CategoryEntity));
+        }
 
         category.Name = newCategory.Name;
         category.Image = newCategory.Image;

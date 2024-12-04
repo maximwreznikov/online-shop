@@ -8,7 +8,7 @@ internal class CategoryContextFactory : IDesignTimeDbContextFactory<CatalogConte
     public CatalogContext CreateDbContext(string[ ] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>();
-        optionsBuilder.UseSqlite("Data Source=../db/sql_main.db");
+        optionsBuilder.UseSqlite("Data Source=sql_main.db");
 
         return new CatalogContext(optionsBuilder.Options);
     }

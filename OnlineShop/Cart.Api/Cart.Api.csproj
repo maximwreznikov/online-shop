@@ -13,7 +13,6 @@
         <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.5.3" />
         <PackageReference Include="Keycloak.AuthServices.Authorization" Version="2.5.3" />
         <PackageReference Include="Keycloak.AuthServices.Sdk" Version="2.5.3" />
-        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
@@ -28,6 +27,7 @@
       <ProjectReference Include="..\Cart.Contracts\Cart.Contracts.csproj" />
       <ProjectReference Include="..\Cart.Core\Cart.Core.csproj" />
       <ProjectReference Include="..\Cart.DAL\Cart.DAL.csproj" />
+      <ProjectReference Include="..\Cart.Queue\Cart.Queue.csproj" />
     </ItemGroup>
 
 </Project>

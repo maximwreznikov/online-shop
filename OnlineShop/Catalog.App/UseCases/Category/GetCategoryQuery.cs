@@ -1,4 +1,5 @@
 ﻿using Catalog.App.Dtos;
+using Catalog.App.Exceptions;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -13,7 +14,7 @@ public class GetCategoryQueryHandler(IRepository<CategoryEntity> categoryReposit
 {
     public async Task<CategoryResponse> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
-        var category = await categoryRepository.Get(request.Id);
+        var category = await categoryRepository.Get(request.Id) ?? throw new NotFoundEntity(nameof(CategoryEntity));
 
         return new CategoryResponse
         {

@@ -1,5 +1,6 @@
 ﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Exceptions;
 using Catalog.App.Specifications;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
@@ -21,6 +22,10 @@ public class UpdateProductCommandHandler(
     {
         var newProduct = request.Product;
         var product = await productRepository.Get(newProduct.Id);
+        if (product == null)
+        {
+            throw new NotFoundEntity(nameof(ProductEntity));
+        }
 
         product.Name = newProduct.Name;
         product.Description = newProduct.Description;

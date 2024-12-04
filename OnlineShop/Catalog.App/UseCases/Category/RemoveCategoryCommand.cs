@@ -1,5 +1,6 @@
 ﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Exceptions;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -17,6 +18,11 @@ public class RemoveCategoryCommandHandler(
     public async Task<CategoryResponse> Handle(RemoveCategoryCommand command, CancellationToken cancellationToken)
     {
         var category = await categoryRepository.Get(command.Id);
+        if (category == null)
+        {
+            throw new NotFoundEntity(nameof(CategoryEntity));
+        }
+
         await categoryRepository.Delete(category);
         await unitOfWork.Save(cancellationToken);
 

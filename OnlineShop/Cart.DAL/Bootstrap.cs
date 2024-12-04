@@ -8,7 +8,8 @@ public static class Bootstrap
 {
     public static void AddPersistence(this IServiceCollection services, IConfigurationManager configurationManager)
     {
-        services.Configure<LiteDbOptions>(configurationManager.GetSection(nameof(LiteDbOptions)));
+        var litedbSection = configurationManager.GetSection(nameof(LiteDbOptions));
+        services.Configure<LiteDbOptions>(litedbSection);
 
         services.AddSingleton<ILiteDbContext, LiteDbContext>();
 

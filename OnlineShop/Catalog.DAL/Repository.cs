@@ -6,9 +6,10 @@ namespace Catalog.DAL;
 
 internal class Repository<T>(CatalogContext context) : IRepository<T> where T : class, IEntity
 {
-    public async Task Create(T item)
+    public Task Create(T item)
     {
         context.Set<T>().Add(item);
+        return Task.CompletedTask;
     }
 
     public Task<T?> Get(int id)
@@ -16,14 +17,16 @@ internal class Repository<T>(CatalogContext context) : IRepository<T> where T : 
         return context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task Update(T item)
+    public Task Update(T item)
     {
         context.Set<T>().Update(item);
+        return Task.CompletedTask;
     }
 
-    public async Task Delete(T item)
+    public Task Delete(T item)
     {
         context.Set<T>().Remove(item);
+        return Task.CompletedTask;
     }
 
     public Task<List<T>> Find(int skip, int take, ISpecification<T> specification)

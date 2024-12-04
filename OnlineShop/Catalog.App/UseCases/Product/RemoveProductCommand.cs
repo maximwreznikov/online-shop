@@ -1,5 +1,6 @@
 ﻿using Catalog.App.Abstractions;
 using Catalog.App.Dtos;
+using Catalog.App.Exceptions;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Domain.Abstractions;
 using Catalog.Domain.Entities;
@@ -16,7 +17,7 @@ public class RemoveProductCommandHandler(
 {
     public async Task<ProductResponse> Handle(RemoveProductCommand command, CancellationToken cancellationToken)
     {
-        var product = await productRepository.Get(command.Id);
+        var product = await productRepository.Get(command.Id) ?? throw new NotFoundEntity(nameof(ProductEntity));
         await productRepository.Delete(product);
         await unitOfWork.Save(cancellationToken);
         return new ProductResponse(product);

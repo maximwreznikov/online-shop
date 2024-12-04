@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Cart.Api;
 
@@ -20,7 +21,7 @@ public class LogRolesMiddleware
             .Select(c => c.Value)
             .ToArray();
 
-        _logger.LogInformation("Made request with role {Roles}", roles.ToString());
+        _logger.LogInformation("Made request with role {Roles}", string.Join(',', roles));
         await _next(context);
     }
 }
