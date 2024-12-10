@@ -18,10 +18,10 @@ public class ProductsController(IMediator mediator) : ControllerBase
         return Ok(products);
     }
 
-    [HttpGet]
-    public async Task<ActionResult<ProductResponse>> Get([FromRoute] int id)
+    [HttpGet("{productId}")]
+    public async Task<ActionResult<ProductResponse>> Get([FromRoute] int productId)
     {
-        var products = await mediator.Send(new GetProductQuery(id));
+        var products = await mediator.Send(new GetProductQuery(productId));
         return Ok(products);
     }
 
