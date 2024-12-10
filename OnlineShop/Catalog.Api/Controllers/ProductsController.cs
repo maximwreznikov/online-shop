@@ -18,6 +18,13 @@ public class ProductsController(IMediator mediator) : ControllerBase
         return Ok(products);
     }
 
+    [HttpGet]
+    public async Task<ActionResult<ProductResponse>> Get([FromRoute] int id)
+    {
+        var products = await mediator.Send(new GetProductQuery(id));
+        return Ok(products);
+    }
+
     [HttpPost]
     [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<CreatedResult> Create([FromBody] ProductDto newProduct)

@@ -1,0 +1,11 @@
+@Gateway.Api_HostAddress = http://localhost:5152
+
+GET {{Gateway.Api_HostAddress}}/api/v1/products
+Accept: application/json
+
+###
+
+GET {{Gateway.Api_HostAddress}}/todos/1
+Accept: application/json
+
+###

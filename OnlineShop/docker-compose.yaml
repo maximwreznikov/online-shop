@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+    gateway:
+        build:
+            context: ./
+            dockerfile: ./Gateway.Api/Dockerfile
+        environment:
+            - RabbitSettings__Host=rabbitmq_management
     cart-api:
       build:
           context: ./
