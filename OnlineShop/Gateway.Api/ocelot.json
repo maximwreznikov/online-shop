@@ -18,7 +18,17 @@
             }
         },
         {
-            "UpstreamHttpMethod": [ "Post", "Get"," Put", "Delete" ],
+            "UpstreamHttpMethod": [ "Post", "Put", "Delete" ],
+            "UpstreamPathTemplate": "/api/v1/products/{productId}",
+            "DownstreamPathTemplate": "/api/products/{productId}",
+            "RouteIsCaseSensitive": false,
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                { "Host": "localhost", "Port": 5229 }
+            ]
+        },
+        {
+            "UpstreamHttpMethod": [ "Get"],
             "UpstreamPathTemplate": "/api/v1/products/{productId}",
             "DownstreamPathTemplate": "/api/products/{productId}",
             "RouteIsCaseSensitive": false,
@@ -34,8 +44,8 @@
         },
         {
             "UpstreamHttpMethod": [ "Get" ],
-            "UpstreamPathTemplate": "/api/v1/products/details/{productId}",
-            "DownstreamPathTemplate": "/api/products/details/{productId}/",
+            "UpstreamPathTemplate": "/api/v1/productDetails/{productId}",
+            "DownstreamPathTemplate": "/api/productDetails/{productId}",
             "RouteIsCaseSensitive": false,
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
@@ -63,7 +73,7 @@
     "Aggregates": [
         {
             "UpstreamHttpMethod": ["Get"],
-            "UpstreamPathTemplate": "/api/v1/products/details/{productId}",
+            "UpstreamPathTemplate": "/api/v1/products-details/{productId}",
             "RouteKeys": [ "Product", "ProductDetails" ],
             "Aggregator": "CombineProductDetailsAggregator"
         }

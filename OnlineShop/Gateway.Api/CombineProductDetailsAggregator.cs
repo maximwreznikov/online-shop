@@ -22,7 +22,7 @@ public class CombineProductDetailsAggregator : IDefinedAggregator
 
         // The only constraint here: You must return a DownstreamResponse object.
         return new DownstreamResponse(
-            new StringContent(JsonConvert.SerializeObject(contentList)),
+            JsonContent.Create(contentList),
             HttpStatusCode.OK,
             responses.SelectMany(x => x.Headers).ToList(),
             "reason");
