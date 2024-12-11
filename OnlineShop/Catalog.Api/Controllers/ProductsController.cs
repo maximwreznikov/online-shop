@@ -25,6 +25,19 @@ public class ProductsController(IMediator mediator) : ControllerBase
         return Ok(products);
     }
 
+    [HttpGet("/details/{productId}")]
+    public async Task<ActionResult<ProductResponse>> GetDetails([FromRoute] int productId)
+    {
+        return Ok(new
+        {
+            ProductId = productId,
+            Liked = 21,
+            Brend = "Samsung",
+            Rating = 8.9,
+            Year = 2023
+        });
+    }
+
     [HttpPost]
     [Authorize(Policy = PolicyConstants.ManagerPolicy)]
     public async Task<CreatedResult> Create([FromBody] ProductDto newProduct)

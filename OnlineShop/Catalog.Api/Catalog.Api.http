@@ -27,6 +27,10 @@ Content-Type: application/json
 GET {{Catalog.Api_HostAddress}}/api/products
 Accept: application/json
 
+### get product details
+GET {{Catalog.Api_HostAddress}}/api/products/1
+Accept: application/json
+
 
 ### create product
 POST {{Catalog.Api_HostAddress}}/api/products
