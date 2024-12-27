@@ -1,6 +1,6 @@
-﻿using Catalog.Api.Dtos;
-using Catalog.App.UseCases.Product;
+﻿using Catalog.App.UseCases.Product;
 using Catalog.App.UseCases.Product.Dtos;
+using Catalog.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Cart.Contracts;
-using Catalog.Api.Dtos;
+﻿using Cart.Contracts;
 using Catalog.App.UseCases.Product;
+using Catalog.Contracts;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

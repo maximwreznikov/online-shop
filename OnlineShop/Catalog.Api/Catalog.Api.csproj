@@ -24,6 +24,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Cart.Contracts\Cart.Contracts.csproj" />
+      <ProjectReference Include="..\Catalog.Api.Graph\Catalog.Api.Graph.csproj" />
+      <ProjectReference Include="..\Catalog.Contracts\Catalog.Contracts.csproj" />
       <ProjectReference Include="..\Catalog.DAL\Catalog.DAL.csproj" />
     </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Catalog.Api.Dtos;
+namespace Catalog.Contracts;
 
 public record AddToCartDto
 (
