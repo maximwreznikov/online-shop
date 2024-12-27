@@ -1,4 +1,7 @@
 ﻿using Catalog.Api.Graph.SchemaTypes.Types;
+using Catalog.Api.SchemaTypes.Types;
+using Catalog.App.UseCases.Category;
+using Catalog.App.UseCases.Category.Dtos;
 using Catalog.App.UseCases.Product;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Contracts;
@@ -19,18 +22,56 @@ public sealed class CatalogMutation : ObjectGraphType
 
         Field<ProductType>("createProduct")
             .Argument<NonNullGraphType<ProductInputType>>("product")
-            .ResolveAsync(async context =>
+            .ResolveAsync(CreateProduct());
+
+        Field<CategoryType>("createCategory")
+            .Argument<NonNullGraphType<CategoryInputType>>("category")
+            .ResolveAsync(CreateCategory);
+
+        Field<ProductType>("deleteProduct")
+            .Argument<IdGraphType>("productId")
+            .ResolveAsync(DeleteProduct);
+
+        Field<CategoryType>("deleteCategory")
+            .Argument<IdGraphType>("categoryId")
+            .ResolveAsync(DeleteCategory);
+    }
+
+    private Func<IResolveFieldContext<object?>, Task<object?>> CreateProduct() =>
+        async context =>
+        {
+            var product = context.GetArgument<ProductDto>("product");
+            return await _mediator.Send(new CreateProductCommand(new ProductRequest
             {
-                var product = context.GetArgument<ProductDto>("product");
-                return await _mediator.Send(new CreateProductCommand(new ProductRequest
-                {
-                    Name = product.Name,
-                    Description = product.Description,
-                    Image = product.Image,
-                    Price = product.Price,
-                    Amount = product.Amount,
-                    Category = product.Category
-                }));
-            });
+                Name = product.Name,
+                Description = product.Description,
+                Image = product.Image,
+                Price = product.Price,
+                Amount = product.Amount,
+                Category = product.Category
+            }));
+        };
+
+    private async Task<object?> CreateCategory(IResolveFieldContext ctx)
+    {
+        var category = ctx.GetArgument<CategoryDto>("category");
+        return await _mediator.Send(new CreateCategoryCommand(new CategoryRequest
+        {
+            Name = category.Name,
+            Image = category.Image,
+            ParentCategory = category.ParentCategory
+        }));
+    }
+
+    private async Task<object?> DeleteProduct(IResolveFieldContext ctx)
+    {
+        int productId = ctx.GetArgument<int>("productId");
+        return await _mediator.Send(new RemoveProductCommand(productId));
+    }
+
+    private async Task<object?> DeleteCategory(IResolveFieldContext ctx)
+    {
+        int categoryId = ctx.GetArgument<int>("categoryId");
+        return await _mediator.Send(new RemoveCategoryCommand(categoryId));
     }
 }

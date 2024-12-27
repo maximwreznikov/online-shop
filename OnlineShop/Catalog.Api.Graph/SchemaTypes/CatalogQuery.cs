@@ -20,6 +20,8 @@ public sealed class CatalogQuery : ObjectGraphType
         Name = "Query";
 
         Field<ListGraphType<ProductType>>("products")
+            .Argument<int>("skip")
+            .Argument<int>("take")
             .ResolveAsync(async ctx => await GetProducts(ctx));
 
         Field<ListGraphType<CategoryType>>("categories")
@@ -30,11 +32,15 @@ public sealed class CatalogQuery : ObjectGraphType
 
     private async Task<IEnumerable<ProductResponse>> GetProducts(IResolveFieldContext ctx)
     {
-        return await _mediator.Send(new GetProductListQuery(0, 1000), ctx.CancellationToken);
+        int skip = ctx.GetArgument<int>("skip");
+        int take = ctx.GetArgument<int>("take");
+        return await _mediator.Send(new GetProductListQuery(skip, take), ctx.CancellationToken);
     }
 
     private async Task<IEnumerable<CategoryResponse>> GetCategories(IResolveFieldContext ctx)
     {
-        return await _mediator.Send(new GetCategoriesQuery(0, 1000), ctx.CancellationToken);
+        int skip = ctx.GetArgument<int>("skip");
+        int take = ctx.GetArgument<int>("take");
+        return await _mediator.Send(new GetCategoriesQuery(skip, take), ctx.CancellationToken);
     }
 }

@@ -1,0 +1,95 @@
+@Catalog.Api_HostAddress = http://localhost:5229/api/graphql
+@auth_token = "" # call auth api before
+
+### All products and categories
+
+GRAPHQL {{Catalog.Api_HostAddress}}
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+
+query ($skip: Int!, $take: Int!) {
+  categories(skip: $skip, take: $take) {
+    id
+    name
+    image
+    parentCategory
+    parentCategoryId
+  }
+  products(skip: $skip, take: $take) {
+    id
+    name
+    description
+    image
+    price
+    amount
+    category
+    categoryId
+  }
+}
+
+{
+    "skip": 0,
+    "take": 1000
+}
+
+### Create product
+GRAPHQL {{Catalog.Api_HostAddress}}
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+mutation ($newProduct: ProductInput!) {
+  createProduct(product: $newProduct) {
+    id
+    name
+    price
+    amount
+    category
+  }
+}
+
+{
+    "newProduct": {
+        "name": "S25 Ultra",
+        "description": "Cell phone",
+        "image": "samsung.jpeg",
+        "price": 954,
+        "amount": 15,
+        "category": "SubTest"
+    }
+}
+
+### Delete product
+GRAPHQL {{Catalog.Api_HostAddress}}
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+mutation ($productId:ID!) {
+  deleteProduct(productId: $productId) {
+    id
+    name
+    description
+    category
+  }
+}
+
+{
+   "productId": 4
+}
+
+### Delete category
+GRAPHQL {{Catalog.Api_HostAddress}}
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+mutation ($categoryId:ID!) {
+  deleteCategory(categoryId: $categoryId) {
+    id
+    name
+  }
+}
+
+{
+    "categoryId": 4
+}
+
