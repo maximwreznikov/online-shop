@@ -28,6 +28,16 @@ public sealed class CatalogMutation : ObjectGraphType
             .Argument<NonNullGraphType<CategoryInputType>>("category")
             .ResolveAsync(CreateCategory);
 
+        Field<ProductType>("updateProduct")
+            .Argument<IdGraphType>("id")
+            .Argument<NonNullGraphType<ProductInputType>>("product")
+            .ResolveAsync(UpdateProduct);
+
+        Field<CategoryType>("updateCategory")
+            .Argument<IdGraphType>("id")
+            .Argument<NonNullGraphType<CategoryInputType>>("category")
+            .ResolveAsync(UpdateCategory);
+
         Field<ProductType>("deleteProduct")
             .Argument<IdGraphType>("productId")
             .ResolveAsync(DeleteProduct);
@@ -57,6 +67,35 @@ public sealed class CatalogMutation : ObjectGraphType
         var category = ctx.GetArgument<CategoryDto>("category");
         return await _mediator.Send(new CreateCategoryCommand(new CategoryRequest
         {
+            Name = category.Name,
+            Image = category.Image,
+            ParentCategory = category.ParentCategory
+        }));
+    }
+
+    private async Task<object?> UpdateProduct(IResolveFieldContext ctx)
+    {
+        int productId = ctx.GetArgument<int>("id");
+        var product = ctx.GetArgument<ProductDto>("product");
+        return await _mediator.Send(new UpdateProductCommand(new UpdateProductRequest
+        {
+            Id = productId,
+            Name = product.Name,
+            Description = product.Description,
+            Image = product.Image,
+            Price = product.Price,
+            Amount = product.Amount,
+            Category = product.Category
+        }));
+    }
+
+    private async Task<object?> UpdateCategory(IResolveFieldContext ctx)
+    {
+        int categoryId = ctx.GetArgument<int>("id");
+        var category = ctx.GetArgument<CategoryDto>("category");
+        return await _mediator.Send(new UpdateCategoryCommand(new UpdateCategoryRequest
+        {
+            Id = categoryId,
             Name = category.Name,
             Image = category.Image,
             ParentCategory = category.ParentCategory
