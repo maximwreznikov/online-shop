@@ -1,6 +1,6 @@
 @Auth.Api_HostAddress = http://localhost:8080/realms/master/protocol/openid-connect/token
 @ClientId = test_online_shop
-@ClientSecret = EYBfEbKXBvBtiDoIBLlqSfRYD8PJm98K
+@ClientSecret = 94sEoFvdXVyCyel8JLLTWB6OHGmh2Yrl
 
 ### Get token Manager
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Catalog.Contracts;
+namespace Catalog.Contracts.Models;
 
 public record ProductDto
 {

@@ -5,6 +5,7 @@ using Catalog.App.UseCases.Category.Dtos;
 using Catalog.App.UseCases.Product;
 using Catalog.App.UseCases.Product.Dtos;
 using Catalog.Contracts;
+using Catalog.Contracts.Models;
 using GraphQL;
 using GraphQL.Types;
 using MediatR;
@@ -22,29 +23,35 @@ public sealed class CatalogMutation : ObjectGraphType
 
         Field<ProductType>("createProduct")
             .Argument<NonNullGraphType<ProductInputType>>("product")
-            .ResolveAsync(CreateProduct());
+            .ResolveAsync(CreateProduct())
+            .AuthorizeWithPolicy(PolicyConstants.ManagerPolicy);
 
         Field<CategoryType>("createCategory")
             .Argument<NonNullGraphType<CategoryInputType>>("category")
-            .ResolveAsync(CreateCategory);
+            .ResolveAsync(CreateCategory)
+            .AuthorizeWithPolicy(PolicyConstants.ManagerPolicy);
 
         Field<ProductType>("updateProduct")
             .Argument<IdGraphType>("id")
             .Argument<NonNullGraphType<ProductInputType>>("product")
-            .ResolveAsync(UpdateProduct);
+            .ResolveAsync(UpdateProduct)
+            .AuthorizeWithPolicy(PolicyConstants.ManagerPolicy);
 
         Field<CategoryType>("updateCategory")
             .Argument<IdGraphType>("id")
             .Argument<NonNullGraphType<CategoryInputType>>("category")
-            .ResolveAsync(UpdateCategory);
+            .ResolveAsync(UpdateCategory)
+            .AuthorizeWithPolicy(PolicyConstants.ManagerPolicy);
 
         Field<ProductType>("deleteProduct")
             .Argument<IdGraphType>("productId")
-            .ResolveAsync(DeleteProduct);
+            .ResolveAsync(DeleteProduct)
+            .AuthorizeWithPolicy(PolicyConstants.ManagerPolicy);
 
         Field<CategoryType>("deleteCategory")
             .Argument<IdGraphType>("categoryId")
-            .ResolveAsync(DeleteCategory);
+            .ResolveAsync(DeleteCategory)
+            .AuthorizeWithPolicy(PolicyConstants.ManagerPolicy);
     }
 
     private Func<IResolveFieldContext<object?>, Task<object?>> CreateProduct() =>

@@ -1,4 +1,4 @@
-﻿namespace Catalog.Contracts;
+﻿namespace Catalog.Contracts.Models;
 
 public record CategoryDto(
     string Name,

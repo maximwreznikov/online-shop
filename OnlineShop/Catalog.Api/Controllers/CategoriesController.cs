@@ -1,6 +1,7 @@
 ﻿using Catalog.App.UseCases.Category;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.Contracts;
+using Catalog.Contracts.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

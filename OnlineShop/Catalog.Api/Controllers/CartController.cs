@@ -1,6 +1,7 @@
 ﻿using Cart.Contracts;
 using Catalog.App.UseCases.Product;
 using Catalog.Contracts;
+using Catalog.Contracts.Models;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
