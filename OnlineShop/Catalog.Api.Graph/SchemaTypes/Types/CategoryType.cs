@@ -1,7 +1,7 @@
 ﻿using Catalog.App.UseCases.Category.Dtos;
 using GraphQL.Types;
 
-namespace Catalog.Api.SchemaTypes.Types;
+namespace Catalog.Api.Graph.SchemaTypes.Types;
 
 public sealed class CategoryType : ObjectGraphType<CategoryResponse>
 {

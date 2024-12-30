@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Catalog.Api.GraphQL;
+namespace Catalog.Api.Graph.Infrastructure;
 
 public class GraphQLUserContext : Dictionary<string, object>
 {

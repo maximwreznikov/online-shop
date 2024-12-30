@@ -1,5 +1,4 @@
 ﻿using Catalog.Api.Graph.SchemaTypes.Types;
-using Catalog.Api.SchemaTypes.Types;
 using Catalog.App.UseCases.Category;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.App.UseCases.Product;

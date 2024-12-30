@@ -1,18 +1,12 @@
 ﻿using Cart.Contracts.Settings;
 using Catalog.Api;
 using Catalog.Api.Graph;
-using Catalog.Api.GraphQL;
-using Catalog.Api.SchemaTypes;
 using Catalog.App;
 using Catalog.DAL;
-using GraphQL;
-using GraphQL.Caching;
-using GraphQL.Server.Ui.GraphiQL;
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
 using Keycloak.AuthServices.Sdk;
 using MassTransit;
-using Microsoft.Extensions.Diagnostics.Metrics;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,13 +57,13 @@ var app = builder.Build();
 
 app.Services.Migrate();
 
-UseSwagger(app);
-
-app.UseGraph();
-
 app
     .UseAuthentication()
     .UseAuthorization();
+
+UseSwagger(app);
+
+app.UseGraph();
 
 app.MapControllers();
 

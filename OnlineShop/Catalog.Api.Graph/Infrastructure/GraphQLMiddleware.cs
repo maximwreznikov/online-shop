@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Catalog.Api.GraphQL;
 using GraphQL;
 using GraphQL.Instrumentation;
 using GraphQL.Transport;
@@ -56,6 +55,7 @@ public class GraphQLMiddleware : IMiddleware
             options.EnableMetrics = _settings.EnableMetrics;
             options.RequestServices = context.RequestServices;
             options.CancellationToken = context.RequestAborted;
+            options.User = context.User;
         });
 
         if (_settings.EnableMetrics)

@@ -1,10 +1,8 @@
 ﻿using Catalog.Api.Graph.SchemaTypes.Types;
-using Catalog.Api.SchemaTypes.Types;
 using Catalog.App.UseCases.Category;
 using Catalog.App.UseCases.Category.Dtos;
 using Catalog.App.UseCases.Product;
 using Catalog.App.UseCases.Product.Dtos;
-using Catalog.Contracts;
 using Catalog.Contracts.Models;
 using GraphQL;
 using GraphQL.Types;

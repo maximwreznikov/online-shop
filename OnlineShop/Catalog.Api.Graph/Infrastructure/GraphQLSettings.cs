@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Catalog.Api.GraphQL;
+namespace Catalog.Api.Graph.Infrastructure;
 
 public class GraphQLSettings
 {

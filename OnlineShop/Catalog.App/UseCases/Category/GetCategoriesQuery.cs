@@ -21,7 +21,8 @@ public class GetCategoriesQueryHandler(IRepository<CategoryEntity> categoryRepos
             Id = x.Id,
             Name = x.Name,
             Image = x.Image,
-            ParentCategory = x.ParentCategory
+            ParentCategory = x.ParentCategory,
+            ParentCategoryId = x.ParentCategoryId
         });
     }
 }

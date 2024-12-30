@@ -1,5 +1,4 @@
-﻿using Catalog.Contracts;
-using Catalog.Contracts.Models;
+﻿using Catalog.Contracts.Models;
 using GraphQL.Types;
 
 namespace Catalog.Api.Graph.SchemaTypes.Types;

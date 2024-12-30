@@ -33,6 +33,28 @@ query ($skip: Int!, $take: Int!) {
     "take": 1000
 }
 
+### Create category
+GRAPHQL {{Catalog.Api_HostAddress}}
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+mutation ($newCategory: CategoryInput!) {
+  createCategory(category: $newCategory) {
+    id
+    name
+    parentCategory
+    parentCategoryId
+  }
+}
+
+{
+    "newCategory": {
+        "name": "SubTest5",
+        "image": "subtest5.jpeg",
+        "parentCategory": "Test"
+    }
+}
+
 ### Create product
 GRAPHQL {{Catalog.Api_HostAddress}}
 Authorization: Bearer {{auth_token}}
@@ -90,6 +112,6 @@ mutation ($categoryId:ID!) {
 }
 
 {
-    "categoryId": 4
+    "categoryId": 10
 }
 

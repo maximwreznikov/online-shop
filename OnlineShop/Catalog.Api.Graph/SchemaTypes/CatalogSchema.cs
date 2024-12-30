@@ -1,4 +1,5 @@
-﻿using GraphQL.Instrumentation;
+﻿using GraphQL;
+using GraphQL.Instrumentation;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 
