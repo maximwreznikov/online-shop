@@ -1,24 +1,58 @@
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 option csharp_namespace = "Cart.Api";
 
-package greet;
+package cart;
 
 // The greeting service definition.
 service Cart {
-  // Sends a greeting
-  rpc SayHello (SimpleRequest) returns (SimpleResponse);
-  rpc GetList (SimpleRequest) returns (SimpleResponse);
-  rpc AddItem (SimpleRequest) returns (SimpleResponse);
-  rpc RemoveItem (SimpleRequest) returns (SimpleResponse);
+    // Sends a greeting
+    rpc SayHello (SimpleRequest) returns (SimpleResponse);
+    rpc GetList (ItemListRequest) returns (ItemListResponse);
+    rpc GetListStream (ItemListRequest) returns (stream ItemResponse);
+    rpc AddItem (AddItemRequest) returns (ItemListResponse);
+    rpc AddItemClientStream (stream AddItemRequest) returns (ItemListResponse);
+    rpc AddItemBidirectional (stream AddItemRequest) returns (stream ItemResponse);
+    rpc RemoveItem (RemoveItemRequest) returns (ItemListResponse);
 }
 
-// The request message containing the user's name.
 message SimpleRequest {
-  string name = 1;
+    string name = 1;
 }
 
-// The response message containing the greetings.
 message SimpleResponse {
-  string message = 1;
+    string message = 1;
+}
+
+message ItemListResponse {
+    repeated ItemData items = 1;
+}
+
+message ItemResponse {
+    ItemData data = 1;
+}
+
+message ItemListRequest {
+    string cartId = 1;
+}
+
+message ItemData {
+    int32   id = 1;
+    int32   productId = 2;
+    string  name = 3;
+    google.protobuf.StringValue image = 4;
+    double  price = 5;
+    int32   quantity = 6;
+}
+
+message AddItemRequest {
+    string      cartId = 1;
+    ItemData    data = 2;
+}
+
+message RemoveItemRequest {
+    string cartId = 1;
+    int32  itemId = 2;
 }
