@@ -1,5 +1,4 @@
 ﻿using Cart.Core.Abstractions.Inbound;
-using Cart.Core.Entities;
 using Grpc.Core;
 
 namespace Cart.Api.Services;
@@ -25,6 +24,12 @@ public class CartApi(ICartService cartService) : Cart.CartBase
     public override async Task GetListStream(ItemListRequest request, IServerStreamWriter<ItemResponse> responseStream,
         ServerCallContext context)
     {
+        var cartId = Guid.Parse(request.CartId);
+        var cart = await cartService.Get(cartId);
+        foreach (var cartItem in cart.Items)
+        {
+            await responseStream.WriteAsync(cartItem.ToResponse(), context.CancellationToken);
+        }
     }
 
     public override async Task<ItemListResponse> AddItem(AddItemRequest request, ServerCallContext context)
@@ -63,7 +68,7 @@ public class CartApi(ICartService cartService) : Cart.CartBase
     public override async Task<ItemListResponse> RemoveItem(RemoveItemRequest request, ServerCallContext context)
     {
         var cartId = Guid.Parse(request.CartId);
-        var itemId = request.ItemId;
+        int itemId = request.ItemId;
         var cartEntity = await cartService.RemoveItem(cartId, itemId);
         return cartEntity.ToResponse();
     }

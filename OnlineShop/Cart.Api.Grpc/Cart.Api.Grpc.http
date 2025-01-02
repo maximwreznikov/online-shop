@@ -1,0 +1,10 @@
+#@Cart.Api_HostAddress = grpcs://localhost:6052/cart.Cart/
+@Cart.Api_HostAddress = localhost:5052/cart.Cart/
+@auth_token = "" # call auth api before
+
+###
+GRPC {{Cart.Api_HostAddress}}SayHello
+
+{
+    "name": "3BBA0EA3-9C7C-44BB-BB56-D16DB6137394"
+}
