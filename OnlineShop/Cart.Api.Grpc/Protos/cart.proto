@@ -6,6 +6,12 @@ option csharp_namespace = "Cart.Api";
 
 package cart;
 
+option java_package = "example.corp.example.v1";
+
+option java_outer_classname = "SomeAPI";
+
+
+
 // The greeting service definition.
 service Cart {
     // Sends a greeting

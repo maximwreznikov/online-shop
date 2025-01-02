@@ -1,10 +1,24 @@
 #@Cart.Api_HostAddress = grpcs://localhost:6052/cart.Cart/
-@Cart.Api_HostAddress = localhost:5052/cart.Cart/
+@Cart.Api_HostAddress = grpcs://localhost:5052/cart.Cart/
 @auth_token = "" # call auth api before
 
-###
-GRPC {{Cart.Api_HostAddress}}SayHello
+
+GRPC grpcs://localhost:6052/cart.Cart/SayHello
 
 {
-    "name": "3BBA0EA3-9C7C-44BB-BB56-D16DB6137394"
+    "name": "HTTP Client with gRPC"
+}
+
+###
+GRPC {{Cart.Api_HostAddress}}GetList
+
+{
+    "cartId": "36f0b165-a594-4fa7-b1be-9eb5326315ff"
+}
+
+###
+GRPC {{Cart.Api_HostAddress}}GetListStream
+
+{
+    "cartId": "36f0b165-a594-4fa7-b1be-9eb5326315ff"
 }
